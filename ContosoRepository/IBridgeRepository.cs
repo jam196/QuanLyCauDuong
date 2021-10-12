@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Models
 {
     /// <summary>
-    /// Defines methods for interacting with the customers backend.
+    /// Defines methods for interacting with the bridge's backend.
     /// </summary>
     public interface IBridgeRepository
     {
@@ -20,12 +20,12 @@ namespace Models
         Task<IEnumerable<Bridge>> GetAsync(string search);
 
         /// <summary>
-        /// Returns the customer with the given id. 
+        /// Returns the bridge with the given id. 
         /// </summary>
         Task<Bridge> GetAsync(Guid id);
 
         /// <summary>
-        /// Adds a new bridge if the customer does not exist, updates the 
+        /// Adds a new bridge if the bridge does not exist, updates the 
         /// existing bridge otherwise.
         /// </summary>
         Task<Bridge> UpsertAsync(Bridge bridge);

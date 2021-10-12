@@ -74,7 +74,7 @@
                     <muxc:Expander.Header>
                         <Grid>
                             <TextBlock 
-                                    Text="General"
+                                    Text="Thông tin chung"
                                     Style="{ThemeResource SubtitleTextBlockStyle}"/>
                             <TextBlock
                                     Text="{x:Bind ViewModel.Name, Mode=OneWay}" 
@@ -85,65 +85,111 @@
 
                     <RelativePanel Margin="8,0,0,12">
                         <TextBox
+                                x:Name="Name"
+                                MinWidth="250"
+                                Margin="0,8,16,8"
+                                Header="Tên cầu"
+                                IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
+                                RelativePanel.AlignLeftWithPanel="True"
+                                Text="{x:Bind ViewModel.Name, Mode=TwoWay}"
+                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                        <TextBox
+                                x:Name="TotalInvestment"
+                                MinWidth="250"
+                                Margin="0,8,16,8"
+                                Header="Tổng đầu tư"
+                                IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
+                                RelativePanel.RightOf="Name"
+                                Text="{x:Bind ViewModel.TotalInvestment, Mode=TwoWay}"
+                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                        <TextBox
                                 x:Name="Investor"
-                                MinWidth="120"
+                                MinWidth="250"
                                 Margin="0,8,16,8"
                                 Header="Chủ đầu tư"
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
-                                RelativePanel.AlignLeftWithPanel="True"
+                                RelativePanel.RightOf="TotalInvestment"
                                 Text="{x:Bind ViewModel.Investor, Mode=TwoWay}"
                                 Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
                         <TextBox
-                                x:Name="Designer"
-                                MinWidth="120"
+                                x:Name="StartTime"
+                                MinWidth="250"
                                 Margin="0,8,16,8"
-                                Header="Bên thiết kế"
+                                Header="Thời gian bắt đầu xây dựng"
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
-                                RelativePanel.RightOf="Investor"
+                                RelativePanel.AlignLeftWithPanel="True"
+                                RelativePanel.Below="Name"
+                                Text="{x:Bind ViewModel.StartTime, Mode=TwoWay}"
+                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                        <TextBox
+                                x:Name="EndTime"
+                                MinWidth="250"
+                                Margin="0,8,16,8"
+                                Header="Thời gian hoàn thành xây dựng"
+                                IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
+                                RelativePanel.Below="Name"
+                                RelativePanel.RightOf="StartTime"
+                                Text="{x:Bind ViewModel.EndTime, Mode=TwoWay}"
+                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                        <TextBox
+                                x:Name="DesignLoad"
+                                MinWidth="250"
+                                Margin="0,8,16,8"
+                                Header="Tải trọng thiết kế"
+                                IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
+                                RelativePanel.Below="Name"
+                                RelativePanel.RightOf="EndTime"
+                                Text="{x:Bind ViewModel.DesignLoad, Mode=TwoWay}"
+                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                        <TextBox
+                                x:Name="Designer"
+                                MinWidth="250"
+                                Margin="0,8,16,8"
+                                Header="Đơn vị thiết kế"
+                                IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
+                                RelativePanel.Below="StartTime"
+                                RelativePanel.AlignLeftWithPanel="True"
                                 Text="{x:Bind ViewModel.Designer, Mode=TwoWay}"
                                 Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
                         <TextBox
                                 x:Name="Builder"
-                                Grid.Row="1"
-                                MinWidth="120"
-                                Margin="0,8,16,0"
-                                Header="Builder"
+                                MinWidth="250"
+                                Margin="0,8,16,8"
+                                Header="Đơn vị thi công"
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
-                                RelativePanel.AlignLeftWithPanel="True"
-                                RelativePanel.Below="Investor"
-                                Text="{x:Bind ViewModel.Company, Mode=TwoWay}" />
-                        <TextBox
-                                x:Name="Supervisor"
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                MinWidth="132"
-                                Margin="0,8,16,0"
-                                Header="Primary phone"
-                                InputScope="TelephoneNumber"
-                                IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
-                                RelativePanel.Below="Investor"
-                                RelativePanel.RightOf="Builder"
-                                Text="{x:Bind ViewModel.Supervisor, Mode=TwoWay}" />
+                                RelativePanel.Below="StartTime"
+                                RelativePanel.RightOf="Designer"
+                                Text="{x:Bind ViewModel.Builder, Mode=TwoWay}"
+                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
                         <TextBox
                                 x:Name="Manager"
-                                Grid.Column="2"
-                                MinWidth="160"
-                                Margin="0,8,16,0"
-                                Header="Manager"
-                                InputScope="EmailNameOrAddress"
+                                MinWidth="250"
+                                Margin="0,8,16,8"
+                                Header="Đơn vị quản lý"
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
-                                RelativePanel.Below="Investor"
-                                RelativePanel.RightOf="Supervisor"
-                                Text="{x:Bind ViewModel.Manager, Mode=TwoWay}" />
+                                RelativePanel.Below="StartTime"
+                                RelativePanel.RightOf="Builder"
+                                Text="{x:Bind ViewModel.Manager, Mode=TwoWay}"
+                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                        <TextBox
+                                x:Name="Supervisor"
+                                MinWidth="250"
+                                Margin="0,8,16,8"
+                                Header="Đơn vị giám sát"
+                                IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
+                                RelativePanel.Below="StartTime"
+                                RelativePanel.RightOf="Manager"
+                                Text="{x:Bind ViewModel.Supervisor, Mode=TwoWay}"
+                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
                     </RelativePanel>
 
                 </muxc:Expander>
 
-                <muxc:Expander x:Name="AddressExpander">
+                <muxc:Expander x:Name="AddressExpander" Margin="0,20,0,0">
                     <muxc:Expander.Header>
                         <Grid>
                             <TextBlock
-                                    Text="Location"
+                                    Text="Vị trí"
                                     Style="{ThemeResource SubtitleTextBlockStyle}"/>
                             <TextBlock
                                     Text="{x:Bind ViewModel.Location, Mode=OneWay}" 

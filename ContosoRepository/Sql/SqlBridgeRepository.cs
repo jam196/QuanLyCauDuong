@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Repository.Sql
 {
     /// <summary>
-    /// Contains methods for interacting with the customers backend using 
+    /// Contains methods for interacting with the bridges backend using 
     /// SQL via Entity Framework Core 2.0.
     /// </summary>
     public class SqlBridgeRepository : IBridgeRepository
@@ -29,36 +29,36 @@ namespace Repository.Sql
 
         public async Task<Bridge> GetAsync(Guid id)
         {
-            return await _db.Customers
+            return await _db.Bridges
                 .AsNoTracking()
-                .FirstOrDefaultAsync(customer => customer.Id == id);
+                .FirstOrDefaultAsync(bridge => bridge.Id == id);
         }
 
         public async Task<IEnumerable<Bridge>> GetAsync(string value)
         {
             string[] parameters = value.Split(' ');
             return await _db.Bridges
-                .Where(customer =>
+                .Where(bridge =>
                     parameters.Any(parameter =>
-                        customer.Name.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                        customer.Investor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                        customer.Designer.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                        customer.Builder.StartsWith(parameter) ||
-                        customer.Supervisor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
-                .OrderByDescending(customer =>
+                        bridge.Name.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                        bridge.Investor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                        bridge.Designer.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                        bridge.Builder.StartsWith(parameter) ||
+                        bridge.Supervisor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
+                .OrderByDescending(bridge =>
                     parameters.Count(parameter =>
-                        customer.Name.StartsWith(parameter) ||
-                        customer.Investor.StartsWith(parameter) ||
-                        customer.Designer.StartsWith(parameter) ||
-                        customer.Builder.StartsWith(parameter) ||
-                        customer.Supervisor.StartsWith(parameter)))
+                        bridge.Name.StartsWith(parameter) ||
+                        bridge.Investor.StartsWith(parameter) ||
+                        bridge.Designer.StartsWith(parameter) ||
+                        bridge.Builder.StartsWith(parameter) ||
+                        bridge.Supervisor.StartsWith(parameter)))
                 .AsNoTracking()
                 .ToListAsync();
         }
 
         public async Task<Bridge> UpsertAsync(Bridge bridge)
         {
-            var current = await _db.Customers.FirstOrDefaultAsync(_customer => _customer.Id == bridge.Id);
+            var current = await _db.Bridges.FirstOrDefaultAsync(_bridge => _bridge.Id == bridge.Id);
             if (null == current)
             {
                 _db.Bridges.Add(bridge);
@@ -73,12 +73,12 @@ namespace Repository.Sql
 
         public async Task DeleteAsync(Guid id)
         {
-            var customer = await _db.Customers.FirstOrDefaultAsync(_customer => _customer.Id == id);
-            if (null != customer)
+            var bridge = await _db.Bridges.FirstOrDefaultAsync(_bridge => _bridge.Id == id);
+            if (null != bridge)
             {
-                var orders = await _db.Orders.Where(order => order.CustomerId == id).ToListAsync();
-                _db.Orders.RemoveRange(orders);
-                _db.Customers.Remove(customer);
+                /*var orders = await _db.Orders.Where(order => order.CustomerId == id).ToListAsync();
+                _db.Orders.RemoveRange(orders);*/
+                _db.Bridges.Remove(bridge);
                 await _db.SaveChangesAsync();
             }
         }

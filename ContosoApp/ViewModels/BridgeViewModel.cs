@@ -46,7 +46,7 @@ namespace QuanLyCauDuong.ViewModels
         /// </summary>
         public string Name
         {
-            get => Model.Name;
+            get => Model?.Name;
             set
             {
                 if (value != Model.Name)
@@ -64,7 +64,7 @@ namespace QuanLyCauDuong.ViewModels
         /// </summary>
         public string Investor
         {
-            get => Model.Investor;
+            get => Model?.Investor;
             set
             {
                 if (value != Model.Investor)
@@ -73,6 +73,96 @@ namespace QuanLyCauDuong.ViewModels
                     IsModified = true;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(Investor));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the bridge's Investor.
+        /// </summary>
+        public string TotalInvestment
+        {
+            get => Model?.TotalInvestment.ToString();
+            set
+            {
+                if (value != Model?.TotalInvestment.ToString())
+                {
+                    Model.TotalInvestment = float.Parse(value);
+                    IsModified = true;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(TotalInvestment));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the bridge's Investor.
+        /// </summary>
+        public string StartTime
+        {
+            get => Model?.StartTime;
+            set
+            {
+                if (value != Model.StartTime)
+                {
+                    Model.StartTime = value;
+                    IsModified = true;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(StartTime));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the bridge's Investor.
+        /// </summary>
+        public string Builder
+        {
+            get => Model?.Builder;
+            set
+            {
+                if (value != Model.Builder)
+                {
+                    Model.Builder = value;
+                    IsModified = true;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Builder));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the bridge's Investor.
+        /// </summary>
+        public string DesignLoad
+        {
+            get => Model?.DesignLoad.ToString();
+            set
+            {
+                if (value != Model.DesignLoad.ToString())
+                {
+                    Model.DesignLoad = float.Parse(value);
+                    IsModified = true;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(DesignLoad));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the bridge's Investor.
+        /// </summary>
+        public string EndTime
+        {
+            get => Model?.EndTime;
+            set
+            {
+                if (value != Model.EndTime)
+                {
+                    Model.EndTime = value;
+                    IsModified = true;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(EndTime));
                 }
             }
         }
@@ -88,7 +178,7 @@ namespace QuanLyCauDuong.ViewModels
         /// </summary>
         public string Designer
         {
-            get => Model.Designer;
+            get => Model?.Designer;
             set
             {
                 if (value != Model.Designer)
@@ -105,7 +195,7 @@ namespace QuanLyCauDuong.ViewModels
         /// </summary>
         public string Company
         {
-            get => Model.Builder;
+            get => Model?.Builder;
             set
             {
                 if (value != Model.Builder)
@@ -122,7 +212,7 @@ namespace QuanLyCauDuong.ViewModels
         /// </summary>
         public string Supervisor
         {
-            get => Model.Supervisor;
+            get => Model?.Supervisor;
             set
             {
                 if (value != Model.Supervisor)
@@ -139,7 +229,7 @@ namespace QuanLyCauDuong.ViewModels
         /// </summary>
         public string Manager
         {
-            get => Model.Manager;
+            get => Model?.Manager;
             set
             {
                 if (value != Model.Manager)
@@ -156,7 +246,7 @@ namespace QuanLyCauDuong.ViewModels
         /// </summary>
         public string Status
         {
-            get => Model.Status;
+            get => Model?.Status;
             set
             {
                 if (value != Model.Status)
@@ -173,7 +263,7 @@ namespace QuanLyCauDuong.ViewModels
         /// </summary>
         public string Location
         {
-            get => Model.Location;
+            get => Model?.Location;
             set
             {
                 if (value != Model.Location)

@@ -105,8 +105,7 @@ namespace QuanLyCauDuong.Views
         /// </summary>
         private async Task ResetBridgeList()
         {
-            await dispatcherQueue.EnqueueAsync(async () =>
-                await ViewModel.GetBridgeListAsync());
+            await dispatcherQueue.EnqueueAsync(async () => await ViewModel.GetBridgeListAsync());
         }
 
         /// <summary>
@@ -157,6 +156,10 @@ namespace QuanLyCauDuong.Views
             {
                 await FilterBridgeList(BridgeSearchBox.AutoSuggestBox.Text);
             }
+            else
+            {
+                await ResetBridgeList();
+            }
         }
 
         /// <summary>
@@ -198,7 +201,7 @@ namespace QuanLyCauDuong.Views
         }
 
         /// <summary>
-        /// Selects the tapped customer. 
+        /// Selects the tapped bridge. 
         /// </summary>
         private void DataGrid_RightTapped(object sender, RightTappedRoutedEventArgs e) =>
             ViewModel.SelectedBridge = (e.OriginalSource as FrameworkElement).DataContext as CustomerViewModel;
