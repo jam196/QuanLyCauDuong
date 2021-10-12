@@ -57,5 +57,10 @@ namespace Repository.Sql
         /// Gets the line items DbSet.
         /// </summary>
         public DbSet<LineItem> LineItems { get; set; }
+
+        /// <summary>
+        /// Gets the bridges DbSet.
+        /// </summary>
+        public DbSet<Bridge> Bridges { get; set; }
     }
 }

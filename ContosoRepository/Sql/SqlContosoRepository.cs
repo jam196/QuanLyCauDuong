@@ -53,5 +53,8 @@ namespace Repository.Sql
 
         public IProductRepository Products => new SqlProductRepository(
             new ContosoContext(_dbOptions));
+
+        public IBridgeRepository Bridges => new SqlBridgeRepository(
+            new ContosoContext(_dbOptions));
     }
 }

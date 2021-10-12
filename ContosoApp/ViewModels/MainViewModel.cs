@@ -48,6 +48,9 @@ namespace QuanLyCauDuong.ViewModels
         public ObservableCollection<CustomerViewModel> Customers { get; }
             = new ObservableCollection<CustomerViewModel>();
 
+        public ObservableCollection<BridgeViewModel> Bridges { get; }
+            = new ObservableCollection<BridgeViewModel>();
+
         private CustomerViewModel _selectedCustomer;
 
         /// <summary>
@@ -57,6 +60,17 @@ namespace QuanLyCauDuong.ViewModels
         {
             get => _selectedCustomer;
             set => Set(ref _selectedCustomer, value);
+        }
+
+        private CustomerViewModel _selectedBridge;
+
+        /// <summary>
+        /// Gets or sets the selected customer, or null if no customer is selected. 
+        /// </summary>
+        public CustomerViewModel SelectedBridge
+        {
+            get => _selectedBridge;
+            set => Set(ref _selectedBridge, value);
         }
 
         private bool _isLoading = false;
@@ -89,6 +103,30 @@ namespace QuanLyCauDuong.ViewModels
                 foreach (var c in customers)
                 {
                     Customers.Add(new CustomerViewModel(c));
+                }
+                IsLoading = false;
+            });
+        }
+
+        /// <summary>
+        /// Gets the complete list of bridges from the database.
+        /// </summary>
+        public async Task GetBridgeListAsync()
+        {
+            await dispatcherQueue.EnqueueAsync(() => IsLoading = true);
+
+            var bridges = await App.Repository.Bridges.GetAsync();
+            if (bridges == null)
+            {
+                return;
+            }
+
+            await dispatcherQueue.EnqueueAsync(() =>
+            {
+                Customers.Clear();
+                foreach (var c in bridges)
+                {
+                    Bridges.Add(new BridgeViewModel(c));
                 }
                 IsLoading = false;
             });

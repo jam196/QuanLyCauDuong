@@ -152,6 +152,40 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
+        /// Gets or sets the bridge's email. 
+        /// </summary>
+        public string Status
+        {
+            get => Model.Status;
+            set
+            {
+                if (value != Model.Status)
+                {
+                    Model.Status = value;
+                    IsModified = true;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the bridge's email. 
+        /// </summary>
+        public string Location
+        {
+            get => Model.Location;
+            set
+            {
+                if (value != Model.Location)
+                {
+                    Model.Location = value;
+                    IsModified = true;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets or sets a value that indicates whether the underlying model has been modified. 
         /// </summary>
         /// <remarks>
@@ -276,7 +310,7 @@ namespace QuanLyCauDuong.ViewModels
         /// </summary>
         /*public void RefreshOrders() => Task.Run(LoadOrdersAsync);*/
 
-        /// <summary>
+        /*/// <summary>
         /// Loads the order data for the customer.
         /// </summary>
         public async Task LoadOrdersAsync()
@@ -298,7 +332,7 @@ namespace QuanLyCauDuong.ViewModels
 
                 IsLoading = false;
             });
-        }
+        }*/
 
         /// <summary>
         /// Called when a bound DataGrid control causes the customer to enter edit mode.

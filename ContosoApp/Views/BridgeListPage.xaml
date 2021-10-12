@@ -37,19 +37,19 @@
                 HorizontalAlignment="Stretch"
                 Background="Transparent"
                 DefaultLabelPosition="Right"
-                RelativePanel.LeftOf="CustomerSearchBox"
+                RelativePanel.LeftOf="BridgeSearchBox"
                 RelativePanel.RightOf="PageTitle">
             <AppBarButton
                     Click="ViewDetails_Click"
                     Icon="Contact"
-                    IsEnabled="{x:Bind vm:Converters.IsNotNull(ViewModel.SelectedCustomer), Mode=OneWay}"
+                    IsEnabled="{x:Bind vm:Converters.IsNotNull(ViewModel.SelectedBridge), Mode=OneWay}"
                     Label="Xem chi tiết"
                     ToolTipService.ToolTip="View details" />
             <AppBarButton
-                    Click="CreateCustomer_Click"
+                    Click="CreateBridge_Click"
                     Icon="Add"
                     Label="Thêm cầu"
-                    ToolTipService.ToolTip="New customer" />
+                    ToolTipService.ToolTip="Thêm cầu" />
             <AppBarButton
                     Click="{x:Bind ViewModel.Sync}"
                     Icon="Refresh"
@@ -58,11 +58,11 @@
         </CommandBar>
 
         <uc:CollapsibleSearchBox
-                x:Name="CustomerSearchBox"
+                x:Name="BridgeSearchBox"
                 Width="240"
                 Margin="12,8,12,0"
                 CollapseWidth="{StaticResource LargeWindowSnapPoint}"
-                Loaded="CustomerSearchBox_Loaded"
+                Loaded="BridgeSearchBox_Loaded"
                 RelativePanel.AlignRightWithPanel="True"/>
 
         <Grid
@@ -78,8 +78,8 @@
                     Sorting="DataGrid_Sorting"
                     BorderThickness="0"
                     GridLinesVisibility="None"
-                    ItemsSource="{x:Bind ViewModel.Customers}"
-                    SelectedItem="{x:Bind ViewModel.SelectedCustomer, Mode=TwoWay}"
+                    ItemsSource="{x:Bind ViewModel.Bridges}"
+                    SelectedItem="{x:Bind ViewModel.SelectedBridge, Mode=TwoWay}"
                     SelectionMode="Single"
                     KeyDown="DataGrid_KeyDown"
                     RightTapped="DataGrid_RightTapped"
@@ -88,8 +88,8 @@
                 <toolkit:DataGrid.Columns>
                     <toolkit:DataGridTextColumn
                             Header="Tên cầu"
-                            Tag="FirstName"
-                            Binding="{Binding FirstName}"
+                            Tag="Name"
+                            Binding="{Binding Name}"
                             CanUserSort="False"/>
                     <toolkit:DataGridTextColumn
                             Header="Chủ đầu tư"

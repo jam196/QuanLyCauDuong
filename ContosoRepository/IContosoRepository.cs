@@ -45,5 +45,10 @@ namespace Repository
         /// Returns the products repository.
         /// </summary>
         IProductRepository Products { get; }
+
+        /// <summary>
+        /// Returns the bridges repository.
+        /// </summary>
+        IBridgeRepository Bridges { get; }
     }
 }

@@ -161,6 +161,10 @@ namespace QuanLyCauDuong
                 {
                     NavView.SelectedItem = NavView.SettingsItem;
                 }
+                else if (e.SourcePageType == typeof(BridgeListPage))
+                {
+                    NavView.SelectedItem = BridgeListMenuItem;
+                }
             }
         }
 

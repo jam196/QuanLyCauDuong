@@ -43,5 +43,7 @@ namespace Repository.Rest
         public IOrderRepository Orders => new RestOrderRepository(_url);
 
         public IProductRepository Products => new RestProductRepository(_url);
+
+        public IBridgeRepository Bridges => new RestBridgeRepository(_url);
     }
 }

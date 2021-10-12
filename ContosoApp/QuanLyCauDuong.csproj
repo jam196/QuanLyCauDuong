@@ -97,6 +97,7 @@
     <Compile Include="AppShell.xaml.cs">
       <DependentUpon>AppShell.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\BridgeViewModel.cs" />
     <Compile Include="ViewModels\Converters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserControls\AuthenticationControl.xaml.cs">
@@ -113,6 +114,9 @@
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\OrderListPageViewModel.cs" />
+    <Compile Include="Views\BridgeDetailPage.xaml.cs">
+      <DependentUpon>BridgeDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BridgeListPage.xaml.cs">
       <DependentUpon>BridgeListPage.xaml</DependentUpon>
     </Compile>
@@ -205,6 +209,10 @@
     <Page Include="UserControls\CollapsibleSearchBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BridgeDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BridgeListPage.xaml">
       <SubType>Designer</SubType>

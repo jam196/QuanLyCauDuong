@@ -37,20 +37,20 @@ namespace QuanLyCauDuong.Views
         /// <summary>
         /// Initializes the AutoSuggestBox portion of the search box.
         /// </summary>
-        private void CustomerSearchBox_Loaded(object sender, RoutedEventArgs e)
+        private void BridgeSearchBox_Loaded(object sender, RoutedEventArgs e)
         {
-            if (CustomerSearchBox != null)
+            if (BridgeSearchBox != null)
             {
-                CustomerSearchBox.AutoSuggestBox.QuerySubmitted += CustomerSearchBox_QuerySubmitted;
-                CustomerSearchBox.AutoSuggestBox.TextChanged += CustomerSearchBox_TextChanged;
-                CustomerSearchBox.AutoSuggestBox.PlaceholderText = "Tìm cầu...";
+                BridgeSearchBox.AutoSuggestBox.QuerySubmitted += BridgeSearchBox_QuerySubmitted;
+                BridgeSearchBox.AutoSuggestBox.TextChanged += BridgeSearchBox_TextChanged;
+                BridgeSearchBox.AutoSuggestBox.PlaceholderText = "Tìm cầu...";
             }
         }
 
         /// <summary>
         /// Updates the search box items source when the user changes the search text.
         /// </summary>
-        private async void CustomerSearchBox_TextChanged(AutoSuggestBox sender,
+        private async void BridgeSearchBox_TextChanged(AutoSuggestBox sender,
             AutoSuggestBoxTextChangedEventArgs args)
         {
             // We only want to get results when it was a user typing,
@@ -62,90 +62,90 @@ namespace QuanLyCauDuong.Views
                 if (String.IsNullOrEmpty(sender.Text))
                 {
                     await dispatcherQueue.EnqueueAsync(async () =>
-                        await ViewModel.GetCustomerListAsync());
+                        await ViewModel.GetBridgeListAsync());
                     sender.ItemsSource = null;
                 }
                 else
                 {
                     string[] parameters = sender.Text.Split(new char[] { ' ' },
                         StringSplitOptions.RemoveEmptyEntries);
-                    sender.ItemsSource = ViewModel.Customers
-                        .Where(customer => parameters.Any(parameter =>
-                            customer.Address.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                            customer.FirstName.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                            customer.LastName.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                            customer.Company.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
-                        .OrderByDescending(customer => parameters.Count(parameter =>
-                            customer.Address.StartsWith(parameter) ||
-                            customer.FirstName.StartsWith(parameter) ||
-                            customer.LastName.StartsWith(parameter) ||
-                            customer.Company.StartsWith(parameter)))
-                        .Select(customer => $"{customer.FirstName} {customer.LastName}");
+                    sender.ItemsSource = ViewModel.Bridges
+                        .Where(bridge => parameters.Any(parameter =>
+                            bridge.Name.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                            bridge.Investor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                            bridge.Supervisor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                            bridge.Company.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
+                        .OrderByDescending(bridge => parameters.Count(parameter =>
+                            bridge.Manager.StartsWith(parameter) ||
+                            bridge.Location.StartsWith(parameter) ||
+                            bridge.Designer.StartsWith(parameter) ||
+                            bridge.Company.StartsWith(parameter)))
+                        .Select(bridge => $"{bridge.Name} {bridge.Investor}");
                 }
             }
         }
 
         /// Filters or resets the customer list based on the search text.
         /// </summary>
-        private async void CustomerSearchBox_QuerySubmitted(AutoSuggestBox sender,
+        private async void BridgeSearchBox_QuerySubmitted(AutoSuggestBox sender,
             AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             if (String.IsNullOrEmpty(args.QueryText))
             {
-                await ResetCustomerList();
+                await ResetBridgeList();
             }
             else
             {
-                await FilterCustomerList(args.QueryText);
+                await FilterBridgeList(args.QueryText);
             }
         }
 
         /// <summary>
         /// Resets the customer list.
         /// </summary>
-        private async Task ResetCustomerList()
+        private async Task ResetBridgeList()
         {
             await dispatcherQueue.EnqueueAsync(async () =>
-                await ViewModel.GetCustomerListAsync());
+                await ViewModel.GetBridgeListAsync());
         }
 
         /// <summary>
         /// Filters the customer list based on the search text.
         /// </summary>
-        private async Task FilterCustomerList(string text)
+        private async Task FilterBridgeList(string text)
         {
             string[] parameters = text.Split(new char[] { ' ' },
                 StringSplitOptions.RemoveEmptyEntries);
 
-            var matches = ViewModel.Customers.Where(customer => parameters
+            var matches = ViewModel.Bridges.Where(bridge => parameters
                 .Any(parameter =>
-                    customer.Address.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                    customer.FirstName.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                    customer.LastName.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                    customer.Company.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
-                .OrderByDescending(customer => parameters.Count(parameter =>
-                    customer.Address.StartsWith(parameter) ||
-                    customer.FirstName.StartsWith(parameter) ||
-                    customer.LastName.StartsWith(parameter) ||
-                    customer.Company.StartsWith(parameter)))
+                    bridge.Name.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                    bridge.Investor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                    bridge.Supervisor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                    bridge.Company.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
+                .OrderByDescending(bridge => parameters.Count(parameter =>
+                    bridge.Manager.StartsWith(parameter) ||
+                    bridge.Location.StartsWith(parameter) ||
+                    bridge.Designer.StartsWith(parameter) ||
+                    bridge.Company.StartsWith(parameter)))
                 .ToList();
 
             await dispatcherQueue.EnqueueAsync(() =>
             {
-                ViewModel.Customers.Clear();
+                ViewModel.Bridges.Clear();
                 foreach (var match in matches)
                 {
-                    ViewModel.Customers.Add(match);
+                    ViewModel.Bridges.Add(match);
                 }
             });
         }
 
         /// <summary>
-        /// Resets the customer list when leaving the page.
+        /// Resets the bridge list when leaving the page.
         /// </summary>
         protected async override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            await ResetCustomerList();
+            await ResetBridgeList();
         }
 
         /// <summary>
@@ -153,33 +153,33 @@ namespace QuanLyCauDuong.Views
         /// </summary>
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(CustomerSearchBox.AutoSuggestBox.Text))
+            if (!string.IsNullOrWhiteSpace(BridgeSearchBox.AutoSuggestBox.Text))
             {
-                await FilterCustomerList(CustomerSearchBox.AutoSuggestBox.Text);
+                await FilterBridgeList(BridgeSearchBox.AutoSuggestBox.Text);
             }
         }
 
         /// <summary>
-        /// Menu flyout click control for selecting a customer and displaying details.
+        /// Menu flyout click control for selecting a bridge and displaying details.
         /// </summary>
         private void ViewDetails_Click(object sender, RoutedEventArgs e)
         {
-            if (ViewModel.SelectedCustomer != null)
+            if (ViewModel.SelectedBridge != null)
             {
-                Frame.Navigate(typeof(CustomerDetailPage), ViewModel.SelectedCustomer.Model.Id,
+                Frame.Navigate(typeof(BridgeDetailPage), ViewModel.SelectedBridge.Model.Id,
                     new DrillInNavigationTransitionInfo());
             }
         }
 
         private void DataGrid_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e) =>
-            Frame.Navigate(typeof(CustomerDetailPage), ViewModel.SelectedCustomer.Model.Id,
+            Frame.Navigate(typeof(BridgeDetailPage), ViewModel.SelectedBridge.Model.Id,
                     new DrillInNavigationTransitionInfo());
 
         /// <summary>
-        /// Navigates to a blank customer details page for the user to fill in.
+        /// Navigates to a blank bridge details page for the user to fill in.
         /// </summary>
-        private void CreateCustomer_Click(object sender, RoutedEventArgs e) =>
-            Frame.Navigate(typeof(CustomerDetailPage), null, new DrillInNavigationTransitionInfo());
+        private void CreateBridge_Click(object sender, RoutedEventArgs e) =>
+            Frame.Navigate(typeof(BridgeDetailPage), null, new DrillInNavigationTransitionInfo());
 
         /// <summary>
         /// Reverts all changes to the row if the row has changes but a cell is not currently in edit mode.
@@ -189,9 +189,9 @@ namespace QuanLyCauDuong.Views
         private void DataGrid_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Escape &&
-                ViewModel.SelectedCustomer != null &&
-                ViewModel.SelectedCustomer.IsModified &&
-                !ViewModel.SelectedCustomer.IsInEdit)
+                ViewModel.SelectedBridge != null &&
+                ViewModel.SelectedBridge.IsModified &&
+                !ViewModel.SelectedBridge.IsInEdit)
             {
                 (sender as DataGrid).CancelEdit(DataGridEditingUnit.Row);
             }
@@ -201,18 +201,18 @@ namespace QuanLyCauDuong.Views
         /// Selects the tapped customer. 
         /// </summary>
         private void DataGrid_RightTapped(object sender, RightTappedRoutedEventArgs e) =>
-            ViewModel.SelectedCustomer = (e.OriginalSource as FrameworkElement).DataContext as CustomerViewModel;
+            ViewModel.SelectedBridge = (e.OriginalSource as FrameworkElement).DataContext as CustomerViewModel;
 
         /// <summary>
         /// Opens the order detail page for the user to create an order for the selected customer.
         /// </summary>
         private void AddOrder_Click(object sender, RoutedEventArgs e) =>
-            Frame.Navigate(typeof(OrderDetailPage), ViewModel.SelectedCustomer.Model.Id);
+            Frame.Navigate(typeof(OrderDetailPage), ViewModel.SelectedBridge.Model.Id);
 
         /// <summary>
         /// Sorts the data in the DataGrid.
         /// </summary>
         private void DataGrid_Sorting(object sender, DataGridColumnEventArgs e) =>
-            (sender as DataGrid).Sort(e.Column, ViewModel.Customers.Sort);
+            (sender as DataGrid).Sort(e.Column, ViewModel.Bridges.Sort);
     }
 }
