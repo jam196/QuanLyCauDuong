@@ -5,33 +5,32 @@ using System.Threading.Tasks;
 namespace Models
 {
     /// <summary>
-    /// Defines methods for interacting with the bridge's backend.
+    /// Các phương thức cho bảng Bridges.
     /// </summary>
     public interface IBridgeRepository
     {
         /// <summary>
-        /// Returns all bridges. 
+        /// Lấy danh sách cầu. 
         /// </summary>
         Task<IEnumerable<Bridge>> GetAsync();
 
         /// <summary>
-        /// Returns all bridges with a data field matching the start of the given string. 
+        /// Lấy danh sách cầu + search. 
         /// </summary>
         Task<IEnumerable<Bridge>> GetAsync(string search);
 
         /// <summary>
-        /// Returns the bridge with the given id. 
+        /// Lấy thông tin cầu theo ID. 
         /// </summary>
         Task<Bridge> GetAsync(Guid id);
 
         /// <summary>
-        /// Adds a new bridge if the bridge does not exist, updates the 
-        /// existing bridge otherwise.
+        /// Thêm cầu, nếu cầu đã có rồi thì update thông tin.
         /// </summary>
         Task<Bridge> UpsertAsync(Bridge bridge);
 
         /// <summary>
-        /// Deletes a bridge.
+        /// Xóa cầu.
         /// </summary>
         Task DeleteAsync(Guid bridgeId);
     }

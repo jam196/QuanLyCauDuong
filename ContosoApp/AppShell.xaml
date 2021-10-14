@@ -66,8 +66,8 @@
             <muxc:NavigationView.PaneFooter>
                 <StackPanel>
                     <muxc:NavigationViewItem
-                        Content="View code"
-                        ToolTipService.ToolTip="View code"
+                        Content="Source"
+                        ToolTipService.ToolTip="Source code"
                         Tapped="ViewCodeNavPaneButton_Tapped">
                         <muxc:NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE943;"/>

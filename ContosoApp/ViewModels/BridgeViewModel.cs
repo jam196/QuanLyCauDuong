@@ -9,21 +9,21 @@ using Windows.System;
 namespace QuanLyCauDuong.ViewModels
 {
     /// <summary>
-    /// Provides a bindable wrapper for the Bridge model class, encapsulating various services for access by the UI.
+    /// Cung cấp một trình bao bọc có thể liên kết cho lớp mô hình Bridge, đóng gói các dịch vụ khác nhau để giao diện người dùng truy cập.
     /// </summary>
     public class BridgeViewModel : BindableBase, IEditableObject
     {
         private DispatcherQueue dispatcherQueue = DispatcherQueue.GetForCurrentThread();
 
         /// <summary>
-        /// Initializes a new instance of the BridgeViewModel class that wraps a Bridge object.
+        /// Khởi tạo một phiên bản mới của lớp BridgeViewModel bao bọc một đối tượng Bridge.
         /// </summary>
         public BridgeViewModel(Bridge model = null) => Model = model ?? new Bridge();
 
         private Bridge _model;
 
         /// <summary>
-        /// Gets or sets the underlying Bridge object.
+        /// Lấy hoặc đặt đối tượng Bridge.
         /// </summary>
         public Bridge Model
         {
@@ -42,7 +42,7 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the bridge's Name.
+        /// Lấy tên cầu.
         /// </summary>
         public string Name
         {
@@ -60,7 +60,7 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the bridge's Investor.
+        /// Get/set thông tin chủ đầu tư cầu.
         /// </summary>
         public string Investor
         {
@@ -78,7 +78,7 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the bridge's Investor.
+        /// Get/set thông tin tổng đầu tư cầu.
         /// </summary>
         public string TotalInvestment
         {
@@ -96,7 +96,7 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the bridge's Investor.
+        /// Get/set thông tin thời gian bắt đầu xây cầu.
         /// </summary>
         public string StartTime
         {
@@ -114,7 +114,7 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the bridge's Investor.
+        /// Get/set thông tin đơn vị thi công cầu..
         /// </summary>
         public string Builder
         {
@@ -132,7 +132,7 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the bridge's Investor.
+        /// Get/set tải trọng thiết kế.
         /// </summary>
         public string DesignLoad
         {
@@ -150,7 +150,7 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the bridge's Investor.
+        /// Get/set thời gian kết thúc xây cầu.
         /// </summary>
         public string EndTime
         {
@@ -174,7 +174,7 @@ namespace QuanLyCauDuong.ViewModels
             && string.IsNullOrEmpty(Investor) ? "Thêm cầu" : $"{Name} {LastName}";*/
 
         /// <summary>
-        /// Gets or sets the customer's address.
+        /// Get/set đơn vị thiết kế cầu.
         /// </summary>
         public string Designer
         {
@@ -184,23 +184,6 @@ namespace QuanLyCauDuong.ViewModels
                 if (value != Model.Designer)
                 {
                     Model.Designer = value;
-                    IsModified = true;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the bridge's company.
-        /// </summary>
-        public string Company
-        {
-            get => Model?.Builder;
-            set
-            {
-                if (value != Model.Builder)
-                {
-                    Model.Builder = value;
                     IsModified = true;
                     OnPropertyChanged();
                 }
