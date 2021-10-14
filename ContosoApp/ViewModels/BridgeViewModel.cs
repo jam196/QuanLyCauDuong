@@ -267,22 +267,6 @@ namespace QuanLyCauDuong.ViewModels
         /// </remarks>
         public bool IsModified { get; set; }
 
-        /// <summary>
-        /// Gets the collection of the bridge's orders.
-        /// </summary>
-        public ObservableCollection<Order> Orders { get; } = new ObservableCollection<Order>();
-
-        private Order _selectedOrder;
-
-        /// <summary>
-        /// Gets or sets the currently selected order.
-        /// </summary>
-        public Order SelectedOrder
-        {
-            get => _selectedOrder;
-            set => Set(ref _selectedOrder, value);
-        }
-
         private bool _isLoading;
 
         /// <summary>

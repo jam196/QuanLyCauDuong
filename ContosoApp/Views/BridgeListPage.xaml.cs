@@ -170,6 +170,29 @@ namespace QuanLyCauDuong.Views
             }
         }
 
+        /// <summary>
+        /// Deletes the currently selected order.
+        /// </summary>
+        private async void DeleteBridge_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var deleteBridge = ViewModel.SelectedBridge.Model;
+                await ViewModel.DeleteBridge(deleteBridge);
+            }
+            catch (Exception ex)
+            {
+                var dialog = new ContentDialog()
+                {
+                    Title = "Unable to delete order",
+                    Content = $"There was an error when we tried to delete " +
+                        $"invoice #{ViewModel.SelectedBridge.Name}:\n{ex.Message}",
+                    PrimaryButtonText = "OK"
+                };
+                await dialog.ShowAsync();
+            }
+        }
+
         private void DataGrid_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e) =>
             Frame.Navigate(typeof(BridgeDetailPage), ViewModel.SelectedBridge.Model.Id,
                     new DrillInNavigationTransitionInfo());

@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Toolkit.Uwp;
+using Models;
 using Windows.System;
 
 namespace QuanLyCauDuong.ViewModels
@@ -47,6 +48,17 @@ namespace QuanLyCauDuong.ViewModels
         {
             get => _selectedBridge;
             set => Set(ref _selectedBridge, value);
+        }
+
+        private Bridge _selectedBridge2;
+
+        /// <summary>
+        /// Gets or sets the currently selected order.
+        /// </summary>
+        public Bridge SelectedBridge2
+        {
+            get => _selectedBridge2;
+            set => Set(ref _selectedBridge2, value);
         }
 
         private bool _isLoading = false;
@@ -145,5 +157,11 @@ namespace QuanLyCauDuong.ViewModels
                 IsLoading = false;
             });
         }
+
+        /// <summary>
+        /// Deletes the specified order from the database.
+        /// </summary>
+        public async Task DeleteBridge(Bridge bridgeToDelete) =>
+            await App.Repository.Bridges.DeleteAsync(bridgeToDelete.Id);
     }
 }

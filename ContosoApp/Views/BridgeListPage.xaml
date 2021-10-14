@@ -41,12 +41,18 @@
                     Label="Xem chi tiết"
                     ToolTipService.ToolTip="View details" />
             <AppBarButton
+                    x:Name="CommandBarDeleteButton"
+                    Click="DeleteBridge_Click"
+                    Icon="Delete"
+                    IsEnabled="{x:Bind vm:Converters.IsNotNull(ViewModel.SelectedBridge), Mode=OneWay}"
+                    Label="Xóa" />
+            <AppBarButton
                     Click="CreateBridge_Click"
                     Icon="Add"
                     Label="Thêm cầu"
                     ToolTipService.ToolTip="Thêm cầu" />
             <AppBarButton
-                    Click="{x:Bind ViewModel.Sync}"
+                    Click="{x:Bind ViewModel.BridgeSync}"
                     Icon="Refresh"
                     Label="Đồng bộ data"
                     ToolTipService.ToolTip="Sync with server" />

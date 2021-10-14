@@ -158,11 +158,5 @@ namespace QuanLyCauDuong.Views
                 Frame.Navigate(typeof(BridgeDetailPage), bridge.Id);
             }
         }
-
-        /// <summary>
-        /// Sorts the data in the DataGrid.
-        /// </summary>
-        private void DataGrid_Sorting(object sender, DataGridColumnEventArgs e) =>
-            (sender as DataGrid).Sort(e.Column, ViewModel.Orders.Sort);
     }
 }

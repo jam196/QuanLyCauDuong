@@ -71,16 +71,14 @@ namespace Repository.Sql
             return bridge;
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid bridgeId)
         {
-            var bridge = await _db.Bridges.FirstOrDefaultAsync(_bridge => _bridge.Id == id);
-            if (null != bridge)
+            var match = await _db.Bridges.FindAsync(bridgeId);
+            if (match != null)
             {
-                /*var orders = await _db.Orders.Where(order => order.CustomerId == id).ToListAsync();
-                _db.Orders.RemoveRange(orders);*/
-                _db.Bridges.Remove(bridge);
-                await _db.SaveChangesAsync();
+                _db.Bridges.Remove(match);
             }
+            await _db.SaveChangesAsync();
         }
     }
 }
