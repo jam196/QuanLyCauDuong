@@ -160,19 +160,6 @@ namespace QuanLyCauDuong.Views
         }
 
         /// <summary>
-        /// Navigates to the order page for the Bridge.
-        /// </summary>
-        private void ViewOrderButton_Click(object sender, RoutedEventArgs e) =>
-            Frame.Navigate(typeof(OrderDetailPage), ((sender as FrameworkElement).DataContext as Order).Id,
-                new DrillInNavigationTransitionInfo());
-
-        /// <summary>
-        /// Adds a new order for the Bridge.
-        /// </summary>
-        private void AddOrder_Click(object sender, RoutedEventArgs e) =>
-            Frame.Navigate(typeof(OrderDetailPage), ViewModel.Model.Id);
-
-        /// <summary>
         /// Sorts the data in the DataGrid.
         /// </summary>
         private void DataGrid_Sorting(object sender, DataGridColumnEventArgs e) =>

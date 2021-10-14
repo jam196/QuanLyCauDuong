@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Models;
 using Microsoft.Toolkit.Uwp;
 using Windows.System;
+using Windows.UI.Xaml.Controls;
 
 namespace QuanLyCauDuong.ViewModels
 {
@@ -328,7 +329,14 @@ namespace QuanLyCauDuong.ViewModels
                 App.ViewModel.Bridges.Add(this);
             }
 
-            await App.Repository.Bridges.UpsertAsync(Model);
+            try
+            {
+                await App.Repository.Bridges.UpsertAsync(Model);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         /// <summary>
@@ -378,34 +386,17 @@ namespace QuanLyCauDuong.ViewModels
             Model = await App.Repository.Bridges.GetAsync(Model.Id);
         }
 
-        /// <summary>
-        /// Resets the customer detail fields to the current values.
-        /// </summary>
-        /*public void RefreshOrders() => Task.Run(LoadOrdersAsync);*/
-
-        /*/// <summary>
-        /// Loads the order data for the customer.
-        /// </summary>
-        public async Task LoadOrdersAsync()
+        private async void DisplayNoWifiDialog()
         {
-            await dispatcherQueue.EnqueueAsync(() =>
+            ContentDialog noWifiDialog = new ContentDialog
             {
-                IsLoading = true;
-            });
+                Title = "Có lỗi xảy ra",
+                Content = "Check your connection and try again.",
+                CloseButtonText = "Ok"
+            };
 
-            var orders = await App.Repository.Orders.GetForCustomerAsync(Model.Id);
-
-            await dispatcherQueue.EnqueueAsync(() =>
-            {
-                Orders.Clear();
-                foreach (var order in orders)
-                {
-                    Orders.Add(order);
-                }
-
-                IsLoading = false;
-            });
-        }*/
+            ContentDialogResult result = await noWifiDialog.ShowAsync();
+        }
 
         /// <summary>
         /// Called when a bound DataGrid control causes the customer to enter edit mode.

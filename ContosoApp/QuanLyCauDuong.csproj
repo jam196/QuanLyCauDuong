@@ -127,6 +127,9 @@
       <DependentUpon>CustomerListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DataGridHelper.cs" />
+    <Compile Include="Views\ErrorDialog.xaml.cs">
+      <DependentUpon>ErrorDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OrderDetailPage.xaml.cs">
       <DependentUpon>OrderDetailPage.xaml</DependentUpon>
     </Compile>
@@ -225,6 +228,10 @@
     <Page Include="Views\CustomerListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ErrorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OrderDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>

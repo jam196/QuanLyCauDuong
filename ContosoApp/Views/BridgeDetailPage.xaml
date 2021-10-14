@@ -91,8 +91,7 @@
                                 Header="Tên cầu"
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.AlignLeftWithPanel="True"
-                                Text="{x:Bind ViewModel.Name, Mode=TwoWay}"
-                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                                Text="{x:Bind ViewModel.Name, Mode=TwoWay}" />
                         <TextBox
                                 x:Name="TotalInvestment"
                                 MinWidth="250"
@@ -100,8 +99,7 @@
                                 Header="Tổng đầu tư"
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.RightOf="Name"
-                                Text="{x:Bind ViewModel.TotalInvestment, Mode=TwoWay}"
-                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                                Text="{x:Bind ViewModel.TotalInvestment, Mode=TwoWay}" />
                         <TextBox
                                 x:Name="Investor"
                                 MinWidth="250"
@@ -109,8 +107,7 @@
                                 Header="Chủ đầu tư"
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.RightOf="TotalInvestment"
-                                Text="{x:Bind ViewModel.Investor, Mode=TwoWay}"
-                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                                Text="{x:Bind ViewModel.Investor, Mode=TwoWay}" />
                         <TextBox
                                 x:Name="StartTime"
                                 MinWidth="250"
@@ -119,8 +116,7 @@
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.AlignLeftWithPanel="True"
                                 RelativePanel.Below="Name"
-                                Text="{x:Bind ViewModel.StartTime, Mode=TwoWay}"
-                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                                Text="{x:Bind ViewModel.StartTime, Mode=TwoWay}" />
                         <TextBox
                                 x:Name="EndTime"
                                 MinWidth="250"
@@ -129,8 +125,7 @@
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.Below="Name"
                                 RelativePanel.RightOf="StartTime"
-                                Text="{x:Bind ViewModel.EndTime, Mode=TwoWay}"
-                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                                Text="{x:Bind ViewModel.EndTime, Mode=TwoWay}" />
                         <TextBox
                                 x:Name="DesignLoad"
                                 MinWidth="250"
@@ -139,8 +134,7 @@
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.Below="Name"
                                 RelativePanel.RightOf="EndTime"
-                                Text="{x:Bind ViewModel.DesignLoad, Mode=TwoWay}"
-                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                                Text="{x:Bind ViewModel.DesignLoad, Mode=TwoWay}" />
                         <TextBox
                                 x:Name="Designer"
                                 MinWidth="250"
@@ -149,8 +143,7 @@
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.Below="StartTime"
                                 RelativePanel.AlignLeftWithPanel="True"
-                                Text="{x:Bind ViewModel.Designer, Mode=TwoWay}"
-                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                                Text="{x:Bind ViewModel.Designer, Mode=TwoWay}"/>
                         <TextBox
                                 x:Name="Builder"
                                 MinWidth="250"
@@ -159,8 +152,7 @@
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.Below="StartTime"
                                 RelativePanel.RightOf="Designer"
-                                Text="{x:Bind ViewModel.Builder, Mode=TwoWay}"
-                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                                Text="{x:Bind ViewModel.Builder, Mode=TwoWay}"/>
                         <TextBox
                                 x:Name="Manager"
                                 MinWidth="250"
@@ -169,8 +161,7 @@
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.Below="StartTime"
                                 RelativePanel.RightOf="Builder"
-                                Text="{x:Bind ViewModel.Manager, Mode=TwoWay}"
-                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                                Text="{x:Bind ViewModel.Manager, Mode=TwoWay}"/>
                         <TextBox
                                 x:Name="Supervisor"
                                 MinWidth="250"
@@ -179,8 +170,7 @@
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.Below="StartTime"
                                 RelativePanel.RightOf="Manager"
-                                Text="{x:Bind ViewModel.Supervisor, Mode=TwoWay}"
-                                Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                                Text="{x:Bind ViewModel.Supervisor, Mode=TwoWay}" />
                     </RelativePanel>
 
                 </muxc:Expander>

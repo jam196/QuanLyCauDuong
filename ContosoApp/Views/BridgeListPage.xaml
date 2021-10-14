@@ -15,7 +15,7 @@
         <MenuFlyout x:Key="DataGridContextMenu">
             <MenuFlyoutItem
                 Click="ViewDetails_Click"
-                Text="View details"
+                Text="Xem chi tiết"
                 Icon="OpenFile">
             </MenuFlyoutItem>
         </MenuFlyout>

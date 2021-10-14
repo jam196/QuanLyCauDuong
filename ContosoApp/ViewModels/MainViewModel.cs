@@ -38,12 +38,12 @@ namespace QuanLyCauDuong.ViewModels
             set => Set(ref _selectedCustomer, value);
         }
 
-        private CustomerViewModel _selectedBridge;
+        private BridgeViewModel _selectedBridge;
 
         /// <summary>
-        /// Gets or sets the selected customer, or null if no customer is selected. 
+        /// Gets or sets the selected bridge, or null if no customer is selected. 
         /// </summary>
-        public CustomerViewModel SelectedBridge
+        public BridgeViewModel SelectedBridge
         {
             get => _selectedBridge;
             set => Set(ref _selectedBridge, value);

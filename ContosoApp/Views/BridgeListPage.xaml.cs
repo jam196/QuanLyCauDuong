@@ -73,13 +73,11 @@ namespace QuanLyCauDuong.Views
                         .Where(bridge => parameters.Any(parameter =>
                             bridge.Name.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
                             bridge.Investor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                            bridge.Supervisor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                            bridge.Company.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
+                            bridge.Supervisor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
                         .OrderByDescending(bridge => parameters.Count(parameter =>
                             bridge.Manager.StartsWith(parameter) ||
                             bridge.Location.StartsWith(parameter) ||
-                            bridge.Designer.StartsWith(parameter) ||
-                            bridge.Company.StartsWith(parameter)))
+                            bridge.Designer.StartsWith(parameter)))
                         .Select(bridge => $"{bridge.Name} {bridge.Investor}");
                 }
             }
@@ -120,13 +118,11 @@ namespace QuanLyCauDuong.Views
                 .Any(parameter =>
                     bridge.Name.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
                     bridge.Investor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                    bridge.Supervisor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                    bridge.Company.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
+                    bridge.Supervisor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
                 .OrderByDescending(bridge => parameters.Count(parameter =>
                     bridge.Manager.StartsWith(parameter) ||
                     bridge.Location.StartsWith(parameter) ||
-                    bridge.Designer.StartsWith(parameter) ||
-                    bridge.Company.StartsWith(parameter)))
+                    bridge.Designer.StartsWith(parameter)))
                 .ToList();
 
             await dispatcherQueue.EnqueueAsync(() =>
@@ -204,13 +200,7 @@ namespace QuanLyCauDuong.Views
         /// Selects the tapped bridge. 
         /// </summary>
         private void DataGrid_RightTapped(object sender, RightTappedRoutedEventArgs e) =>
-            ViewModel.SelectedBridge = (e.OriginalSource as FrameworkElement).DataContext as CustomerViewModel;
-
-        /// <summary>
-        /// Opens the order detail page for the user to create an order for the selected customer.
-        /// </summary>
-        private void AddOrder_Click(object sender, RoutedEventArgs e) =>
-            Frame.Navigate(typeof(OrderDetailPage), ViewModel.SelectedBridge.Model.Id);
+            ViewModel.SelectedBridge = (e.OriginalSource as FrameworkElement).DataContext as BridgeViewModel;
 
         /// <summary>
         /// Sorts the data in the DataGrid.
