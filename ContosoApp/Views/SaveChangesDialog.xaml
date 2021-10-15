@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="using:QuanLyCauDuong.Views"
     Title="Lưu thay đổi?"
-    Content="Các thông tin bạn vừa nhập sẽ không được lưu lại?"
+    Content="Các thông tin bạn vừa nhập sẽ được lưu lại?"
     PrimaryButtonText="Lưu"
     SecondaryButtonText="Không lưu"
     CloseButtonText="Hủy"

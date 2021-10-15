@@ -313,14 +313,7 @@ namespace QuanLyCauDuong.ViewModels
                 App.ViewModel.Bridges.Add(this);
             }
 
-            try
-            {
-                await App.Repository.Bridges.UpsertAsync(Model);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            await App.Repository.Bridges.UpsertAsync(Model);
         }
 
         /// <summary>
