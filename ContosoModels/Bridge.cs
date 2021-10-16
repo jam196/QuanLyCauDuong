@@ -40,9 +40,9 @@ namespace Models
         // [Required(ErrorMessage = "Địa điểm không được bỏ trống")]
         public string Location { get; set; }
 
-        public float Latitude { get; set; }
+        public double Latitude { get; set; }
 
-        public float Longitude { get; set; }
+        public double Longitude { get; set; }
 
         // Trạng thái
         public string Status { get; set; }

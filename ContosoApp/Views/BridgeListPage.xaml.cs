@@ -179,6 +179,7 @@ namespace QuanLyCauDuong.Views
             {
                 var deleteBridge = ViewModel.SelectedBridge.Model;
                 await ViewModel.DeleteBridge(deleteBridge);
+                await ResetBridgeList();
             }
             catch (Exception ex)
             {

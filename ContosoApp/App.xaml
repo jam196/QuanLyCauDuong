@@ -20,6 +20,11 @@
                                 Color="SteelBlue" />
                         </ResourceDictionary>
                     </ResourceDictionary.ThemeDictionaries>
+                    <Style x:Key="SampleHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource TitleTextBlockStyle}">
+                        <Setter Property="FontSize" Value="28"/>
+                    </Style>
+                    <Style x:Key="ScenarioDescriptionTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
+                    </Style>
                 </ResourceDictionary>
                 <ResourceDictionary>
                     <x:Double x:Key="HeaderHeight">32</x:Double>
