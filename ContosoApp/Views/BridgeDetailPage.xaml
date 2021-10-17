@@ -165,15 +165,15 @@
 
                     <RelativePanel Margin="8,0,0,12">
                         <TextBox
-                        x:Name="Status"
+                        x:Name="Location"
+                        Text="{x:Bind ViewModel.Location, Mode=TwoWay}"
                         MinWidth="300"
                         Margin="0,8,16,8"
                         RelativePanel.AlignLeftWithPanel="True"
-                        Header="Status"
-                        IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
-                        Text="{x:Bind ViewModel.Status, Mode=TwoWay}" />
+                        Header="Vị trí"
+                        IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"/>
                         <Slider RelativePanel.AlignLeftWithPanel="True" MinWidth="1000"
-                                RelativePanel.Below="Status" Minimum="1" Maximum="20" Header="Zoom" Name="zoomSlider" Value="12"/>
+                                RelativePanel.Below="Location" Minimum="1" Maximum="20" Header="Zoom" Name="zoomSlider" Value="12"/>
                         <Slider RelativePanel.AlignLeftWithPanel="True" MinWidth="1000"
                                 RelativePanel.Below="zoomSlider" Minimum="0" Maximum="360" Header="Xoay" Name="headingSlider" Value="0"/>
                         <Slider RelativePanel.AlignLeftWithPanel="True" MinWidth="1000"
@@ -202,7 +202,7 @@
                                      MapServiceToken="qIeRlssc7ywxRLVHkDO0~YKyw6kmGkPGlfgeCxQVFNw~AmoFy0eeoaiKaKP5tR45q2fhvUiEE5KhmVO42D6aQumSUqvMXqLM57Ph7L2F23fp"
                                      MinWidth="1000" MinHeight="500"
                                      >
-                            <AutoSuggestBox TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" x:Name="mySearchBox" Width="300" QueryIcon="Find" Background="Transparent"/>
+                            <AutoSuggestBox TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" DisplayMemberPath="Address.FormattedAddress" TextMemberPath="Address.FormattedAddress"  x:Name="mySearchBox" Width="300" QueryIcon="Find" Background="Transparent"/>
                         </maps:MapControl>
                         <StackPanel x:Name="StatusPanel" Orientation="Vertical" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
                             <TextBlock x:Name="StatusLabel" Margin="10,0,0,10" TextWrapping="Wrap" Text="Status:" />

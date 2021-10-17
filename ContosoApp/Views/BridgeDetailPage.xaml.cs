@@ -92,7 +92,7 @@ namespace QuanLyCauDuong.Views
                     }
                 }
 
-                var saveDialog = new SaveChangesDialog() { Title = $"Save changes?" };
+                var saveDialog = new SaveChangesDialog() { Title = $"Lưu thay đổi?" };
                 await saveDialog.ShowAsync();
                 SaveChangesDialogResult result = saveDialog.Result;
 
@@ -172,9 +172,11 @@ namespace QuanLyCauDuong.Views
             }
         }
 
-        public static readonly Geopoint SeattleGeopoint = new Geopoint(new BasicGeoposition() { Latitude = 21.0434104, Longitude = 105.8576522 });
-
-        private IReadOnlyList<MapLocation> locationSearchResult;
+        public static readonly Geopoint SeattleGeopoint = new Geopoint(new BasicGeoposition()
+        {
+            Latitude = 21.0434104,
+            Longitude = 105.8576522
+        });
 
         private async void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
@@ -188,21 +190,20 @@ namespace QuanLyCauDuong.Views
                 Geopoint hintPoint = new Geopoint(queryHint);
 
                 MapLocationFinderResult result = await MapLocationFinder.FindLocationsAsync(addressToGeocode, hintPoint, 3);
-                locationSearchResult = result.Locations;
-                List<string> _addressList = new List<string>();
-
-                foreach (MapLocation location in locationSearchResult)
-                {
-                    _addressList.Add(location.Address.FormattedAddress);
-                }
-
-                sender.ItemsSource = _addressList;
+                sender.ItemsSource = result.Locations;
             }
         }
 
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            Console.WriteLine(args.SelectedItem);
+            MapLocation selectedLocation = (MapLocation)args.SelectedItem;
+
+            myMap.Center = selectedLocation.Point;
+            myMap.ZoomLevel = 18;
+
+            ViewModel.Model.Latitude = selectedLocation.Point.Position.Latitude;
+            ViewModel.Model.Longitude = selectedLocation.Point.Position.Longitude;
+            ViewModel.Model.Location = selectedLocation.Address.FormattedAddress;
         }
 
         private void MyMap_Loaded(object sender, RoutedEventArgs e)
@@ -279,7 +280,7 @@ namespace QuanLyCauDuong.Views
             var tappedGeoPosition = args.Location.Position;
             ViewModel.Model.Latitude = tappedGeoPosition.Latitude;
             ViewModel.Model.Longitude = tappedGeoPosition.Longitude;
-            string status = "Vĩ độ: " + tappedGeoPosition.Latitude + "\nKinh độ: " + tappedGeoPosition.Longitude;
+            string status = "Kinh độ: " + tappedGeoPosition.Longitude + "\nVĩ độ: " + tappedGeoPosition.Latitude;
             NotifyUser(status, NotifyType.StatusMessage);
         }
 
