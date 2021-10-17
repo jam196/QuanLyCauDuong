@@ -185,9 +185,9 @@ namespace QuanLyCauDuong.Views
             {
                 var dialog = new ContentDialog()
                 {
-                    Title = "Unable to delete order",
-                    Content = $"There was an error when we tried to delete " +
-                        $"invoice #{ViewModel.SelectedBridge.Name}:\n{ex.Message}",
+                    Title = "Xóa cầu thất bại",
+                    Content = $"Gặp lỗi khi xóa " +
+                        $"cầu #{ViewModel.SelectedBridge.Name}:\n{ex.Message}",
                     PrimaryButtonText = "OK"
                 };
                 await dialog.ShowAsync();

@@ -34,9 +34,6 @@ namespace QuanLyCauDuong.ViewModels
                 if (_model != value)
                 {
                     _model = value;
-                    /*RefreshOrders();
-*/
-                    // Raise the PropertyChanged event for all properties.
                     OnPropertyChanged(string.Empty);
                 }
             }
@@ -243,7 +240,7 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the bridge's email. 
+        /// Gets or sets the bridge's location. 
         /// </summary>
         public string Location
         {
@@ -253,6 +250,40 @@ namespace QuanLyCauDuong.ViewModels
                 if (value != Model.Location)
                 {
                     Model.Location = value;
+                    IsModified = true;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the bridge's location. 
+        /// </summary>
+        public double Latitude
+        {
+            get => Model.Latitude;
+            set
+            {
+                if (value != Model.Latitude)
+                {
+                    Model.Latitude = value;
+                    IsModified = true;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the bridge's location. 
+        /// </summary>
+        public double Longitude
+        {
+            get => Model.Longitude;
+            set
+            {
+                if (value != Model.Longitude)
+                {
+                    Model.Longitude = value;
                     IsModified = true;
                     OnPropertyChanged();
                 }

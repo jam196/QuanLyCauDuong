@@ -201,9 +201,9 @@ namespace QuanLyCauDuong.Views
             myMap.Center = selectedLocation.Point;
             myMap.ZoomLevel = 18;
 
-            ViewModel.Model.Latitude = selectedLocation.Point.Position.Latitude;
-            ViewModel.Model.Longitude = selectedLocation.Point.Position.Longitude;
-            ViewModel.Model.Location = selectedLocation.Address.FormattedAddress;
+            ViewModel.Latitude = selectedLocation.Point.Position.Latitude;
+            ViewModel.Longitude = selectedLocation.Point.Position.Longitude;
+            ViewModel.Location = selectedLocation.Address.FormattedAddress;
         }
 
         private void MyMap_Loaded(object sender, RoutedEventArgs e)
@@ -278,8 +278,8 @@ namespace QuanLyCauDuong.Views
         private void MyMap_MapTapped(MapControl sender, MapInputEventArgs args)
         {
             var tappedGeoPosition = args.Location.Position;
-            ViewModel.Model.Latitude = tappedGeoPosition.Latitude;
-            ViewModel.Model.Longitude = tappedGeoPosition.Longitude;
+            ViewModel.Latitude = tappedGeoPosition.Latitude;
+            ViewModel.Longitude = tappedGeoPosition.Longitude;
             string status = "Kinh độ: " + tappedGeoPosition.Longitude + "\nVĩ độ: " + tappedGeoPosition.Latitude;
             NotifyUser(status, NotifyType.StatusMessage);
         }
@@ -344,6 +344,24 @@ namespace QuanLyCauDuong.Views
                 case 1:
                     myMap.MapProjection = MapProjection.Globe;
                     break;
+            }
+        }
+
+        private async void launchURI_Click(object sender, RoutedEventArgs e)
+        {
+            // The URI to launch
+            var uriBing = new Uri(@"bingmaps:?cp=" + ViewModel.Latitude.ToString() + "~-" + ViewModel.Longitude.ToString() + "&amp;lvl=10");
+
+            // Launch the URI
+            var success = await Windows.System.Launcher.LaunchUriAsync(uriBing);
+
+            if (success)
+            {
+                // URI launched
+            }
+            else
+            {
+                // URI launch failed
             }
         }
     }
