@@ -28,6 +28,9 @@ namespace QuanLyCauDuong.ViewModels
         public ObservableCollection<BridgeViewModel> Bridges { get; }
             = new ObservableCollection<BridgeViewModel>();
 
+        public ObservableCollection<UserViewModel> Users { get; }
+             = new ObservableCollection<UserViewModel>();
+
         private CustomerViewModel _selectedCustomer;
 
         /// <summary>

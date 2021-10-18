@@ -62,5 +62,10 @@ namespace Repository.Sql
         /// Gets the bridges DbSet.
         /// </summary>
         public DbSet<Bridge> Bridges { get; set; }
+
+        /// <summary>
+        /// Gets the users DbSet.
+        /// </summary>
+        public DbSet<User> Users { get; set; }
     }
 }

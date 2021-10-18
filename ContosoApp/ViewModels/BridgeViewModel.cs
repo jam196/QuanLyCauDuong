@@ -14,7 +14,7 @@ namespace QuanLyCauDuong.ViewModels
     /// </summary>
     public class BridgeViewModel : BindableBase, IEditableObject
     {
-        private DispatcherQueue dispatcherQueue = DispatcherQueue.GetForCurrentThread();
+        /* private DispatcherQueue dispatcherQueue = DispatcherQueue.GetForCurrentThread();*/
 
         /// <summary>
         /// Khởi tạo một phiên bản mới của lớp BridgeViewModel bao bọc một đối tượng Bridge.
@@ -112,7 +112,7 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
-        /// Get/set thông tin đơn vị thi công cầu..
+        /// Get/set thông tin đơn vị thi công cầu.
         /// </summary>
         public string Builder
         {
@@ -164,12 +164,6 @@ namespace QuanLyCauDuong.ViewModels
                 }
             }
         }
-
-        /// <summary>
-        /// Gets the bridge full (first + last) name.
-        /// </summary>
-        /*public string Name => IsNewBridge && string.IsNullOrEmpty(Name)
-            && string.IsNullOrEmpty(Investor) ? "Thêm cầu" : $"{Name} {LastName}";*/
 
         /// <summary>
         /// Get/set đơn vị thiết kế cầu.

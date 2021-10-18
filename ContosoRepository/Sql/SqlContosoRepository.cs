@@ -56,5 +56,8 @@ namespace Repository.Sql
 
         public IBridgeRepository Bridges => new SqlBridgeRepository(
             new ContosoContext(_dbOptions));
+
+        public IUserRepository Users => new SqlUserRepository(
+            new ContosoContext(_dbOptions));
     }
 }

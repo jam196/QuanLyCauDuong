@@ -50,5 +50,7 @@ namespace Repository
         /// Returns the bridges repository.
         /// </summary>
         IBridgeRepository Bridges { get; }
+
+        IUserRepository Users { get; }
     }
 }

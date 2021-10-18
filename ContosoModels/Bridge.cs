@@ -3,16 +3,12 @@
 namespace Models
 {
     /// <summary>
-    /// Represents a customer.
+    /// Lớp cầu.
     /// </summary>
     public class Bridge : DbObject, IEquatable<Bridge>
     {
         public string Name { get; set; }
-
-        // [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public string StartTime { get; set; }
-
-        // [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public string EndTime { get; set; }
 
         // Chủ đầu tư
@@ -37,7 +33,6 @@ namespace Models
         public string Manager { get; set; }
 
         // Quốc lộ
-        // [Required(ErrorMessage = "Địa điểm không được bỏ trống")]
         public string Location { get; set; }
 
         public double Latitude { get; set; }
@@ -48,7 +43,7 @@ namespace Models
         public string Status { get; set; }
 
         /// <summary>
-        /// Returns the customer's name.
+        /// Lấy tên cầu + chủ đầu tư.
         /// </summary>
         public override string ToString() => $"{Name} {Investor}";
 
@@ -56,9 +51,9 @@ namespace Models
             Name == other.Name &&
             Investor == other.Investor;
 
-        public static implicit operator Bridge(Customer v)
-        {
-            throw new NotImplementedException();
-        }
+        /*        public static implicit operator Bridge(Customer v)
+                {
+                    throw new NotImplementedException();
+                }*/
     }
 }

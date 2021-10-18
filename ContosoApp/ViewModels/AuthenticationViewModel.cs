@@ -23,6 +23,8 @@ namespace QuanLyCauDuong.ViewModels
     /// </summary>
     public class AuthenticationViewModel : BindableBase
     {
+        public UserViewModel UserModel { get; set; }
+
         /// <summary>
         /// Creates a new AuthenticationViewModel for logging users in and getting their info.
         /// </summary>
@@ -175,6 +177,17 @@ namespace QuanLyCauDuong.ViewModels
                     await SetUserInfoAsync(token);
                     await SetUserPhoto(token);
                     await SetVisibleAsync(vm => vm.ShowData);
+
+                    UserModel = new UserViewModel
+                    {
+                        IsNewUser = true,
+                        Name = Name,
+                        Email = Email,
+                        Avatar = "",
+                        Role = "user",
+                    };
+                    /*App.ViewModel.Users.Add(UserModel);*/
+                    await UserModel.SaveAsync();
                 }
                 else
                 {
