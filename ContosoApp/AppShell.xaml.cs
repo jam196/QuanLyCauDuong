@@ -149,7 +149,7 @@ namespace QuanLyCauDuong
         /// </summary>
         private async void ViewCodeNavPaneButton_Tapped(object sender, TappedRoutedEventArgs e) =>
             await Launcher.LaunchUriAsync(new Uri(
-                "https://github.com/Microsoft/Windows-appsample-customers-orders-database"));
+                "https://github.com/jam196/QuanLyCauDuong"));
 
         /// <summary>
         /// Navigates the frame to the previous page.

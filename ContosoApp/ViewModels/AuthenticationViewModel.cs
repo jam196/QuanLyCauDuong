@@ -241,7 +241,6 @@ namespace QuanLyCauDuong.ViewModels
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 string url = "https://graph.microsoft.com/beta/me/photo/$value";
                 var result = await client.GetAsync(url);
-                Console.WriteLine(url);
                 if (!result.IsSuccessStatusCode)
                 {
                     return;
@@ -317,6 +316,8 @@ namespace QuanLyCauDuong.ViewModels
                     PrimaryButtonText = "Đăng xuất",
                     SecondaryButtonText = "Hủy"
                 };
+                ApplicationData.Current.RoamingSettings.Values["IsLoggedIn"] = false;
+                await SetVisibleAsync(vm => vm.ShowWelcome);
                 await SignoutDialog.ShowAsync();
             }
         }

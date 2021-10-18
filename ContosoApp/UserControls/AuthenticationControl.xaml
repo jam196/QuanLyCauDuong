@@ -12,7 +12,7 @@
     <Grid Height="48">
         <!--  Start  -->
         <muxc:NavigationViewItem 
-            Content="Sign in"
+            Content="Đăng nhập"
             Tapped="{x:Bind ViewModel.LoginClick}"
             Visibility="{Binding ShowWelcome, Mode=OneWay}">
             <muxc:NavigationViewItem.Icon>

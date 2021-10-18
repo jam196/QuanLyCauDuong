@@ -131,6 +131,11 @@
                                 RelativePanel.Below="Name"
                                 RelativePanel.RightOf="EndTime"
                                 Text="{x:Bind ViewModel.DesignLoad, Mode=TwoWay}" />
+                        
+                        <ComboBox x:Name="Status" IsEditable="true" IsTextSearchEnabled="True" Header="Trạng thái" Margin="0,8,16,8" MinWidth="250"
+                        RelativePanel.Below="Name" RelativePanel.RightOf="DesignLoad"
+                        ItemsSource="{x:Bind Statuses}" SelectedValue="{x:Bind ViewModel.Status, Mode=TwoWay}"/>
+                        
                         <ComboBox x:Name="Designer" IsEditable="true" IsTextSearchEnabled="True" Header="Đơn vị thiết kế" Margin="0,8,16,8" MinWidth="250"
                         RelativePanel.Below="StartTime" RelativePanel.AlignLeftWithPanel="True"
                         ItemsSource="{x:Bind Designers}" SelectedValue="{x:Bind ViewModel.Designer, Mode=TwoWay}"/>

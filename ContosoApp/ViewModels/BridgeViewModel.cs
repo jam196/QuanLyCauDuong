@@ -247,7 +247,7 @@ namespace QuanLyCauDuong.ViewModels
             get => Model?.Location;
             set
             {
-                if (value != Model.Location)
+                if (value != Model?.Location)
                 {
                     Model.Location = value;
                     IsModified = true;
@@ -264,7 +264,7 @@ namespace QuanLyCauDuong.ViewModels
             get => Model.Latitude;
             set
             {
-                if (value != Model.Latitude)
+                if (value != Model?.Latitude)
                 {
                     Model.Latitude = value;
                     IsModified = true;
@@ -281,7 +281,7 @@ namespace QuanLyCauDuong.ViewModels
             get => Model.Longitude;
             set
             {
-                if (value != Model.Longitude)
+                if (value != Model?.Longitude)
                 {
                     Model.Longitude = value;
                     IsModified = true;

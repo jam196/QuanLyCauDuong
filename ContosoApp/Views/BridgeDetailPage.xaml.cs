@@ -28,6 +28,8 @@ namespace QuanLyCauDuong.Views
         string[] Builders = { "Công Ty TNHH Kỹ Thuật Xây Dựng Công Trình Hoàng Anh", "Tổng Công Ty Thăng Long CTCP", "Tổng Công Ty Xây Dựng Công Trình Giao Thông 1", "Công Ty Cổ Phần Đầu Tư Và Phát Triển Bản Việt", "Công Ty Cổ Phần Xây Lắp Và Thương Mại COMA 25", "Công Ty TNHH Xây Dựng Và Thương Mại Dịch Vụ Hiệp Phúc 4", "Công Ty TNHH Thắng Hòa Phát", "Sand Resource Investment Co..,Ltd", "Công Ty Cổ Phần Đầu Tư & Xây Dựng 579", "Công ty CP Tập đoàn xây dựng Hoà Bình", "Công ty CP xây dựng Coteccons", "Công ty CP Đầu tư Xây dựng Ricons", "Công ty TNHH Tập đoàn xây dựng Delta", "Công ty TNHH Đầu tư Xây dựng Unicons", "Công Ty Cổ Phần Đầu Tư Phát Triển Cường Thuận IDICO", "Công ty CP Fecon", "Công ty TNHH Xây dựng tổng hợp Thắng Đạt", "Công Ty Cổ Phần Đầu Tư Và Xây Dựng Số 18.3", "Công Ty TNHH Quang Minh", "Công Ty Cổ Phần Tập Đoàn Liên Doanh Hồng Thái", "Công Ty TNHH Đầu Tư Xây Dựng", "Xí Nghiệp Đầu Tư Xây Dựng Đô Thành", "Công Ty Cổ Phần Cầu 5 Thăng Long", "Công Ty Cổ Phần Đầu Tư Và Xây Dựng Bình Dương ACC", "Công Ty TNHH Xây Dựng Thương Mại Và Dịch Vụ Vương Trần", "Công Ty CP Thiết Kế Xây Dựng Thương Mại Trang Trí Nội Thất Nhà Đỏ", "Công Ty TNHH Nguyễn Nguyên Phát", "Tổng Công Ty Tư Vấn Thiết Kế Giao Thông Vận Tải", "Công Ty TNHH Xây Dựng & Môi Trường Hoàng Long An", "Công Ty TNHH Xây Dựng Dịch Vụ" };
         string[] Supervisors = { "Ứng dụng Bản đồ Việt", "Đơn Vị Tư Vấn Giám Sát TEXO", "Cục quản lý đường bộ khu vực", "Tư vấn đầu tư và thiết kế xây dựng CDC", "Tư vấn kiểm định xây dựng quốc tế ICCI", "Đơn vị Savills Việt Nam", "Giám sát Hòa Phát", "Monitoring department SRI", "Tư vấn quản lý xây dựng Delta", "Uỷ ban nhân dân tỉnh Hòa Bình", "Conteccons", "Monitoring department Ricons", "The Ascott Limited – Capitaland", "HANCIC USC", "Dịch vụ giám sát cầu đường Newtecons", "Đơn vị Fecon", "Công ty đầu tư phát triển nhà và đô thị HUD", "Cục Quản lý đường bộ", "Ứng dụng Tư vấn & Giám sát Bảo Sơn", "GoGo", "Đơn vị Vinhomes", "Công ty TNHH Artelia Việt Nam", "Công ty tư vấn giám sát xây dựng Nhà Phố Group", "Monitoring Home Red", "Giám sát xây dựng HUD", "Công ty cổ phần tư vấn xây dựng Nagecco" };
         string[] Managers = { "Đầu tư TSG Việt Nam", "Quản lý Thăng Long", "Cục quản lý đường bộ khu vực", "VietSun", "Tư vấn Quản lý Xây dựng COMA 25", "Quản lý Xây Dựng và Thương Mại Hiệp Phúc", "Công ty phát triển dự án Song Nam", "Công ty quản lý xây dựng cao cấp CBRE", "Quản lý dự án & đầu tư CECICO", "Ủy ban nhân dân tỉnh Hòa Bình", "Công ty dịch vụ tiện ích quốc tế OCS", "Ricons Group", "Quản Lý và Khai thác Pan Services", "Tập đoàn xây dựng Newtecons", "Đơn vị Fencon", "Quản Lý Xây Dựng INPLY", "Cục Quản lý đường bộ", "Quản lý Bảo Sơn", "GoGo Group", "Đơn vị Vinhomes", "Ủy ban nhân dân cấp tỉnh Bình Dương ", "DV An ninh Phương Đông STC", "Nhà đỏ Group", "Quản lý và kiểm tra HUD", "Quản lý XD & MT HLA", "Vingroup" };
+        string[] Statuses = { "Đang xây dựng", "Đang bảo trì", "Đang nâng cấp", "Hoạt động tốt" };
+
         /// <summary>
         /// Initializes the page.
         /// </summary>
@@ -174,8 +176,8 @@ namespace QuanLyCauDuong.Views
 
         public static readonly Geopoint SeattleGeopoint = new Geopoint(new BasicGeoposition()
         {
-            Latitude = 21.0434104,
-            Longitude = 105.8576522
+            Latitude = 21.0434302,
+            Longitude = 105.8567339
         });
 
         private async void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -185,8 +187,8 @@ namespace QuanLyCauDuong.Views
                 string addressToGeocode = sender.Text;
 
                 BasicGeoposition queryHint = new BasicGeoposition();
-                queryHint.Latitude = 21.0370997;
-                queryHint.Longitude = 105.8726199;
+                queryHint.Latitude = 21.0434302;
+                queryHint.Longitude = 105.8567339;
                 Geopoint hintPoint = new Geopoint(queryHint);
 
                 MapLocationFinderResult result = await MapLocationFinder.FindLocationsAsync(addressToGeocode, hintPoint, 3);
@@ -209,7 +211,7 @@ namespace QuanLyCauDuong.Views
         private void MyMap_Loaded(object sender, RoutedEventArgs e)
         {
             myMap.Center = SeattleGeopoint;
-            myMap.ZoomLevel = 12;
+            myMap.ZoomLevel = 18;
             SetMapStyle();
             SetMapProjection();
         }
@@ -350,19 +352,8 @@ namespace QuanLyCauDuong.Views
         private async void launchURI_Click(object sender, RoutedEventArgs e)
         {
             // The URI to launch
-            var uriBing = new Uri(@"bingmaps:?cp=" + ViewModel.Latitude.ToString() + "~-" + ViewModel.Longitude.ToString() + "&amp;lvl=10");
-
-            // Launch the URI
-            var success = await Windows.System.Launcher.LaunchUriAsync(uriBing);
-
-            if (success)
-            {
-                // URI launched
-            }
-            else
-            {
-                // URI launch failed
-            }
+            var uriBing = new Uri(@"bingmaps:?cp=" + ViewModel.Latitude.ToString() + "~" + ViewModel.Longitude.ToString() + "&lvl=18");
+            await Windows.System.Launcher.LaunchUriAsync(uriBing);
         }
     }
 }
