@@ -98,7 +98,7 @@ namespace QuanLyCauDuong.ViewModels
         /// </summary>
         public string Role
         {
-            get => Model?.Name;
+            get => Model?.Role;
             set
             {
                 if (value != Model.Role)

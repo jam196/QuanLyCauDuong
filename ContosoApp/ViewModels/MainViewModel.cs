@@ -64,6 +64,17 @@ namespace QuanLyCauDuong.ViewModels
             set => Set(ref _selectedBridge2, value);
         }
 
+        private UserViewModel _selectedUser;
+
+        /// <summary>
+        /// Gets or sets the selected bridge, or null if no customer is selected. 
+        /// </summary>
+        public UserViewModel SelectedUser
+        {
+            get => _selectedUser;
+            set => Set(ref _selectedUser, value);
+        }
+
         private bool _isLoading = false;
 
         /// <summary>
@@ -124,6 +135,30 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
+        /// Gets the complete list of bridges from the database.
+        /// </summary>
+        public async Task GetUserListAsync()
+        {
+            await dispatcherQueue.EnqueueAsync(() => IsLoading = true);
+
+            var users = await App.Repository.Users.GetAsync();
+            if (users == null)
+            {
+                return;
+            }
+
+            await dispatcherQueue.EnqueueAsync(() =>
+            {
+                Users.Clear();
+                foreach (var c in users)
+                {
+                    Users.Add(new UserViewModel(c));
+                }
+                IsLoading = false;
+            });
+        }
+
+        /// <summary>
         /// Saves any modified customers and reloads the customer list from the database.
         /// </summary>
         public void Sync()
@@ -162,9 +197,34 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
+        /// Saves any modified customers and reloads the customer list from the database.
+        /// </summary>
+        public void UserSync()
+        {
+            Task.Run(async () =>
+            {
+                IsLoading = true;
+                foreach (var modifiedUser in Users
+                    .Where(user => user.IsModified).Select(user => user.Model))
+                {
+                    await App.Repository.Users.UpsertAsync(modifiedUser);
+                }
+
+                await GetUserListAsync();
+                IsLoading = false;
+            });
+        }
+
+        /// <summary>
         /// Deletes the specified order from the database.
         /// </summary>
         public async Task DeleteBridge(Bridge bridgeToDelete) =>
             await App.Repository.Bridges.DeleteAsync(bridgeToDelete.Id);
+
+        /// <summary>
+        /// Deletes the specified order from the database.
+        /// </summary>
+        public async Task DeleteUser(Models.User userToDelete) =>
+            await App.Repository.Users.DeleteAsync(userToDelete.Id);
     }
 }

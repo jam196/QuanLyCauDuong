@@ -54,7 +54,7 @@ namespace Repository.Sql
         {
             try
             {
-                var current = await _db.Users.FirstOrDefaultAsync(_user => _user.Id == user.Id);
+                var current = await _db.Users.FirstOrDefaultAsync(_user => _user.Email == user.Email);
                 if (null == current)
                 {
                     _db.Users.Add(user);

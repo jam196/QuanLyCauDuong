@@ -162,7 +162,7 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
-        /// Logs the user in by requesting a token and using it to query the 
+        /// Logs the user in by requesting a token and using it to query the
         /// Microsoft Graph API.
         /// </summary>
         public async Task LoginAsync()
@@ -181,11 +181,13 @@ namespace QuanLyCauDuong.ViewModels
                     UserModel = new UserViewModel
                     {
                         IsNewUser = true,
-                        Name = Name,
-                        Email = Email,
                         Avatar = "",
-                        Role = "user",
+                        Role = "user"
                     };
+
+                    UserModel.Model.Name = Name;
+                    UserModel.Model.Email = Email;
+
                     /*App.ViewModel.Users.Add(UserModel);*/
                     await UserModel.SaveAsync();
                 }

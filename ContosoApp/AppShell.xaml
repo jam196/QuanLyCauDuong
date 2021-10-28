@@ -52,9 +52,9 @@
                     ToolTipService.ToolTip="{x:Bind BridgeListLabel}"
                     Icon="Street"/>
                 <muxc:NavigationViewItem
-                    x:Name="CustomerListMenuItem"
-                    Content="{x:Bind CustomerListLabel}" 
-                    ToolTipService.ToolTip="{x:Bind CustomerListLabel}"
+                    x:Name="UserListMenuItem"
+                    Content="{x:Bind UserListLabel}" 
+                    ToolTipService.ToolTip="{x:Bind UserListLabel}"
                     Icon="ContactInfo"/>
                 <muxc:NavigationViewItem
                     x:Name="OrderListMenuItem"

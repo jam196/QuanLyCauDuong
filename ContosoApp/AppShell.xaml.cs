@@ -96,7 +96,9 @@ namespace QuanLyCauDuong
 
         public readonly string BridgeListLabel = "Quản lý cầu";
 
-        public readonly string CustomerListLabel = "Quản lý người dùng";
+        public readonly string CustomerListLabel = "Quản lý khách hàng";
+
+        public readonly string UserListLabel = "Quản lý người dùng";
 
         public readonly string OrderListLabel = "Quản lý hoạt động";
 
@@ -109,6 +111,7 @@ namespace QuanLyCauDuong
             var pageType =
                 args.IsSettingsInvoked ? typeof(SettingsPage) :
                 label == CustomerListLabel ? typeof(CustomerListPage) :
+                label == UserListLabel ? typeof(UserListPage) :
                 label == BridgeListLabel ? typeof(BridgeListPage) :
                 label == OrderListLabel ? typeof(OrderListPage) : null;
             if (pageType != null && pageType != AppFrame.CurrentSourcePageType)
@@ -125,9 +128,13 @@ namespace QuanLyCauDuong
         {
             if (e.NavigationMode == NavigationMode.Back)
             {
-                if (e.SourcePageType == typeof(CustomerListPage))
+                /*if (e.SourcePageType == typeof(CustomerListPage))
                 {
                     NavView.SelectedItem = CustomerListMenuItem;
+                }*/
+                if (e.SourcePageType == typeof(UserListPage))
+                {
+                    NavView.SelectedItem = UserListMenuItem;
                 }
                 else if (e.SourcePageType == typeof(OrderListPage))
                 {
