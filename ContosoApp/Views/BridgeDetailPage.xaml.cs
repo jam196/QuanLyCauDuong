@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Controls.Maps;
 using Windows.Services.Maps;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Windows.Storage;
 
 namespace QuanLyCauDuong.Views
 {
@@ -51,12 +52,18 @@ namespace QuanLyCauDuong.Views
         /// <summary>
         /// Displays the selected Bridge data.
         /// </summary>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            Models.User currentUser = await App.Repository.Users.GetByEmailAsync((string)ApplicationData.Current.RoamingSettings.Values["Email"]);
+
+            var bridgesByUserId = App.ViewModel.Bridges.Where(bridge => bridge.Model.UserId == currentUser.Id).FirstOrDefault();
+
             if (e.Parameter == null)
             {
+
                 ViewModel = new BridgeViewModel
                 {
+                    UserId = currentUser.Id,
                     IsNewBridge = true,
                     IsInEdit = true
                 };

@@ -42,10 +42,24 @@ namespace Models
         // Trạng thái
         public string Status { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+
+        /// <summary>
+        /// Gets or sets the id of the customer placing the order.
+        /// </summary>
+        public Guid UserId { get; set; }
+
         /// <summary>
         /// Lấy tên cầu + chủ đầu tư.
         /// </summary>
         public override string ToString() => $"{Name} {Investor}";
+
+        public Bridge()
+        {
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+        }
 
         public bool Equals(Bridge other) =>
             Name == other.Name &&

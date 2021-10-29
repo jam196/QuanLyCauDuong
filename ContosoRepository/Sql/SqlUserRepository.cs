@@ -34,6 +34,13 @@ namespace Repository.Sql
                 .FirstOrDefaultAsync(user => user.Id == id);
         }
 
+        public async Task<User> GetByEmailAsync(String email)
+        {
+            return await _db.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(user => user.Email == email);
+        }
+
         public async Task<IEnumerable<User>> GetAsync(string value)
         {
             string[] parameters = value.Split(' ');
@@ -52,7 +59,7 @@ namespace Repository.Sql
 
         public async Task<User> UpsertAsync(User user)
         {
-            try
+            /*try
             {
                 var current = await _db.Users.FirstOrDefaultAsync(_user => _user.Email == user.Email);
                 if (null == current)
@@ -78,7 +85,19 @@ namespace Repository.Sql
             catch (Exception e)
             {
                 throw e;
+            }*/
+
+            var current = await _db.Users.FirstOrDefaultAsync(_user => _user.Email == user.Email);
+            if (null == current)
+            {
+                _db.Users.Add(user);
             }
+            else
+            {
+                _db.Entry(current).CurrentValues.SetValues(user);
+            }
+            await _db.SaveChangesAsync();
+            return user;
         }
 
         public async Task DeleteAsync(Guid userId)

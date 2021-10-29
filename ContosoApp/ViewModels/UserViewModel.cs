@@ -24,6 +24,23 @@ namespace QuanLyCauDuong.ViewModels
         private Models.User _model;
 
         /// <summary>
+        /// Gets or sets the user's ID.
+        /// </summary>
+        public Guid Id
+        {
+            get => Model.Id;
+            set
+            {
+                if (Model.Id != value)
+                {
+                    Model.Id = value;
+                    OnPropertyChanged();
+                    IsModified = true;
+                }
+            }
+        }
+
+        /// <summary>
         /// Lấy hoặc đặt đối tượng User.
         /// </summary>
         public Models.User Model
@@ -112,12 +129,12 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
-        /// Lấy tên cầu.
+        /// Lấy CreatedAt.
         /// </summary>
-        public string CreatedAt
+        public DateTime CreatedAt
         {
-            get => Model?.CreatedAt;
-            set
+            get => Model.CreatedAt;
+            /*set
             {
                 if (value != Model.CreatedAt)
                 {
@@ -126,16 +143,16 @@ namespace QuanLyCauDuong.ViewModels
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(CreatedAt));
                 }
-            }
+            }*/
         }
 
 
         /// <summary>
-        /// Lấy tên cầu.
+        /// Lấy UpdatedAt.
         /// </summary>
-        public string UpdatedAt
+        public DateTime UpdatedAt
         {
-            get => Model?.UpdatedAt;
+            get => Model.UpdatedAt;
             set
             {
                 if (value != Model.UpdatedAt)
@@ -242,6 +259,14 @@ namespace QuanLyCauDuong.ViewModels
         /// Enables edit mode.
         /// </summary>
         public void StartEdit() => IsInEdit = true;
+
+        /// <summary>
+        /// Get user by email.
+        /// </summary>
+        public async Task<Models.User> GetUserByEmailAsync(String email)
+        {
+            return await App.Repository.Users.GetByEmailAsync(email);
+        }
 
         /// <summary>
         /// Reloads all of the customer data.

@@ -42,6 +42,24 @@ namespace QuanLyCauDuong.ViewModels
         /// <summary>
         /// Lấy tên cầu.
         /// </summary>
+        public Guid UserId
+        {
+            get => Model.UserId;
+            set
+            {
+                if (value != Model.UserId)
+                {
+                    Model.UserId = value;
+                    IsModified = true;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(UserId));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Lấy tên cầu.
+        /// </summary>
         public string Name
         {
             get => Model?.Name;
@@ -283,6 +301,44 @@ namespace QuanLyCauDuong.ViewModels
                 }
             }
         }
+
+        /// <summary>
+        /// Lấy CreatedAt.
+        /// </summary>
+        public DateTime CreatedAt
+        {
+            get => Model.CreatedAt;
+            /*set
+            {
+                if (value != Model.CreatedAt)
+                {
+                    Model.CreatedAt = value;
+                    IsModified = true;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(CreatedAt));
+                }
+            }*/
+        }
+
+
+        /// <summary>
+        /// Lấy UpdatedAt.
+        /// </summary>
+        public DateTime UpdatedAt
+        {
+            get => Model.UpdatedAt;
+            set
+            {
+                if (value != Model.UpdatedAt)
+                {
+                    Model.UpdatedAt = value;
+                    IsModified = true;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(UpdatedAt));
+                }
+            }
+        }
+
 
         /// <summary>
         /// Gets or sets a value that indicates whether the underlying model has been modified. 

@@ -26,6 +26,8 @@ namespace Repository.Rest
 
         public async Task<User> GetAsync(Guid id) =>
             await _http.GetAsync<User>($"bridge/{id}");
+        public async Task<User> GetByEmailAsync(String email) =>
+            await _http.GetAsync<User>($"bridge/{email}");
 
         public async Task<User> UpsertAsync(User bridge) =>
             await _http.PostAsync<User, User>("User", bridge);

@@ -33,5 +33,10 @@ namespace Models
         /// Xóa cầu.
         /// </summary>
         Task DeleteAsync(Guid userId);
+
+        /// <summary>
+        /// Lấy thông tin user theo ID. 
+        /// </summary>
+        Task<User> GetByEmailAsync(String email);
     }
 }

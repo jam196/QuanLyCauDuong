@@ -178,9 +178,18 @@ namespace QuanLyCauDuong.ViewModels
                     await SetUserPhoto(token);
                     await SetVisibleAsync(vm => vm.ShowData);
 
+                    bool isNew = false;
+
+                    Models.User checkUserExist = await App.Repository.Users.GetByEmailAsync(Email);
+
+                    if (checkUserExist == null)
+                    {
+                        isNew = true;
+                    }
+
                     UserModel = new UserViewModel
                     {
-                        IsNewUser = true,
+                        IsNewUser = isNew,
                         Avatar = "",
                         Role = "user"
                     };
@@ -188,7 +197,6 @@ namespace QuanLyCauDuong.ViewModels
                     UserModel.Model.Name = Name;
                     UserModel.Model.Email = Email;
 
-                    /*App.ViewModel.Users.Add(UserModel);*/
                     await UserModel.SaveAsync();
                 }
                 else
@@ -235,11 +243,12 @@ namespace QuanLyCauDuong.ViewModels
 
             var me = await graph.Me.Request().GetAsync();
 
+            ApplicationData.Current.RoamingSettings.Values["Email"] = me.UserPrincipalName;
+
             await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                 CoreDispatcherPriority.Normal, async () =>
             {
                 Name = me.DisplayName;
-                /*Email = me.Mail;*/
                 Email = me.UserPrincipalName;
                 Title = me.JobTitle;
                 Domain = (string)await users[0].GetPropertyAsync(KnownUserProperties.DomainName);
