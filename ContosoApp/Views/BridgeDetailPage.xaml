@@ -104,15 +104,13 @@
                         <ComboBox x:Name="Investor" IsEditable="true" IsTextSearchEnabled="True" Header="Chủ đầu tư" Margin="0,8,16,8" MinWidth="250"
                         RelativePanel.RightOf="TotalInvestment"
                         ItemsSource="{x:Bind Investors}" SelectedValue="{x:Bind ViewModel.Investor, Mode=TwoWay}"/>
-                        <TextBox
-                                x:Name="StartTime"
+                        <CalendarDatePicker x:Name="StartTime"
                                 MinWidth="250"
                                 Margin="0,8,16,8"
                                 Header="Thời gian bắt đầu xây dựng"
-                                IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.AlignLeftWithPanel="True"
                                 RelativePanel.Below="Name"
-                                Text="{x:Bind ViewModel.StartTime, Mode=TwoWay}" />
+                                Date="{x:Bind ViewModel.StartTime, Mode=TwoWay}"/>
                         <TextBox
                                 x:Name="EndTime"
                                 MinWidth="250"
@@ -131,11 +129,11 @@
                                 RelativePanel.Below="Name"
                                 RelativePanel.RightOf="EndTime"
                                 Text="{x:Bind ViewModel.DesignLoad, Mode=TwoWay}" />
-                        
+
                         <ComboBox x:Name="Status" IsEditable="true" IsTextSearchEnabled="True" Header="Trạng thái" Margin="0,8,16,8" MinWidth="250"
                         RelativePanel.Below="Name" RelativePanel.RightOf="DesignLoad"
                         ItemsSource="{x:Bind Statuses}" SelectedValue="{x:Bind ViewModel.Status, Mode=TwoWay}"/>
-                        
+
                         <ComboBox x:Name="Designer" IsEditable="true" IsTextSearchEnabled="True" Header="Đơn vị thiết kế" Margin="0,8,16,8" MinWidth="250"
                         RelativePanel.Below="StartTime" RelativePanel.AlignLeftWithPanel="True"
                         ItemsSource="{x:Bind Designers}" SelectedValue="{x:Bind ViewModel.Designer, Mode=TwoWay}"/>

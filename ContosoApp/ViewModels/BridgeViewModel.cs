@@ -114,9 +114,9 @@ namespace QuanLyCauDuong.ViewModels
         /// <summary>
         /// Get/set thông tin thời gian bắt đầu xây cầu.
         /// </summary>
-        public string StartTime
+        public DateTimeOffset StartTime
         {
-            get => Model?.StartTime;
+            get => Model.StartTime;
             set
             {
                 if (value != Model.StartTime)
@@ -168,9 +168,9 @@ namespace QuanLyCauDuong.ViewModels
         /// <summary>
         /// Get/set thời gian kết thúc xây cầu.
         /// </summary>
-        public string EndTime
+        public DateTimeOffset EndTime
         {
-            get => Model?.EndTime;
+            get => Model.EndTime;
             set
             {
                 if (value != Model.EndTime)

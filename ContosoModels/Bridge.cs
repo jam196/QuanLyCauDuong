@@ -8,8 +8,8 @@ namespace Models
     public class Bridge : DbObject, IEquatable<Bridge>
     {
         public string Name { get; set; }
-        public string StartTime { get; set; }
-        public string EndTime { get; set; }
+        public DateTimeOffset StartTime { get; set; }
+        public DateTimeOffset EndTime { get; set; }
 
         // Chủ đầu tư
         public string Investor { get; set; }
