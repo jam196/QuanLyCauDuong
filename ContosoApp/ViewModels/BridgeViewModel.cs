@@ -6,6 +6,7 @@ using Models;
 using Microsoft.Toolkit.Uwp;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
+using Windows.Storage;
 
 namespace QuanLyCauDuong.ViewModels
 {
@@ -20,6 +21,7 @@ namespace QuanLyCauDuong.ViewModels
         /// Khởi tạo một phiên bản mới của lớp BridgeViewModel bao bọc một đối tượng Bridge.
         /// </summary>
         public BridgeViewModel(Bridge model = null) => Model = model ?? new Bridge();
+        public HistoryViewModel ViewModelHistory { get; set; }
 
         private Bridge _model;
 
@@ -62,7 +64,7 @@ namespace QuanLyCauDuong.ViewModels
         /// </summary>
         public string Name
         {
-            get => Model?.Name;
+            get => Model.Name;
             set
             {
                 if (value != Model.Name)
@@ -114,14 +116,14 @@ namespace QuanLyCauDuong.ViewModels
         /// <summary>
         /// Get/set thông tin thời gian bắt đầu xây cầu.
         /// </summary>
-        public DateTimeOffset StartTime
+        public DateTimeOffset? StartTime
         {
-            get => Model.StartTime;
+            get => Model?.StartTime;
             set
             {
-                if (value != Model.StartTime)
+                if (value != Model?.StartTime)
                 {
-                    Model.StartTime = value;
+                    Model.StartTime = (DateTimeOffset)value;
                     IsModified = true;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(StartTime));
@@ -168,14 +170,14 @@ namespace QuanLyCauDuong.ViewModels
         /// <summary>
         /// Get/set thời gian kết thúc xây cầu.
         /// </summary>
-        public DateTimeOffset EndTime
+        public DateTimeOffset? EndTime
         {
-            get => Model.EndTime;
+            get => Model?.EndTime;
             set
             {
-                if (value != Model.EndTime)
+                if (value != Model?.EndTime)
                 {
-                    Model.EndTime = value;
+                    Model.EndTime = (DateTimeOffset)value;
                     IsModified = true;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(EndTime));
@@ -388,11 +390,24 @@ namespace QuanLyCauDuong.ViewModels
         {
             IsInEdit = false;
             IsModified = false;
+
+            String content = "Người dùng " + ApplicationData.Current.RoamingSettings.Values["Email"] + " đã sửa thông tin " + Name + " trong hệ thống";
+
             if (IsNewBridge)
             {
                 IsNewBridge = false;
                 App.ViewModel.Bridges.Add(this);
+
+                content = "Người dùng " + ApplicationData.Current.RoamingSettings.Values["Email"] + " đã thêm thông tin " + Name + " vào hệ thống";
             }
+
+            ViewModelHistory = new HistoryViewModel
+            {
+                IsNewHistory = IsNewBridge,
+                Content = content,
+                IsInEdit = true
+            };
+            await ViewModelHistory.SaveAsync();
 
             await App.Repository.Bridges.UpsertAsync(Model);
         }

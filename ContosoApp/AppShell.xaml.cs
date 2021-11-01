@@ -103,7 +103,9 @@ namespace QuanLyCauDuong
 
         public readonly string UserListLabel = "Quản lý người dùng";
 
-        public readonly string OrderListLabel = "Quản lý hoạt động";
+        public readonly string OrderListLabel = "Quản lý đơn hàng";
+
+        public readonly string HistoryListLabel = "Quản lý hoạt động";
 
         public readonly string ExportLabel = "Xuất dữ liệu";
 
@@ -117,6 +119,7 @@ namespace QuanLyCauDuong
                 args.IsSettingsInvoked ? typeof(SettingsPage) :
                 label == CustomerListLabel ? typeof(CustomerListPage) :
                 label == UserListLabel ? typeof(UserListPage) :
+                label == HistoryListLabel ? typeof(HistoryListPage) :
                 label == ExportLabel ? typeof(ExportPage) :
                 label == HomeLabel ? typeof(Home) :
                 label == BridgeListLabel ? typeof(BridgeListPage) :
@@ -164,14 +167,18 @@ namespace QuanLyCauDuong
                 {
                     NavView.SelectedItem = HomeMenuItem;
                 }
+                else if (e.SourcePageType == typeof(HistoryListPage))
+                {
+                    NavView.SelectedItem = HistoryListMenuItem;
+                }
                 else if (e.SourcePageType == typeof(ExportPage))
                 {
                     NavView.SelectedItem = ExportMenuItem;
                 }
-                else if (e.SourcePageType == typeof(OrderListPage))
+                /*else if (e.SourcePageType == typeof(OrderListPage))
                 {
                     NavView.SelectedItem = OrderListMenuItem;
-                }
+                }*/
                 else if (e.SourcePageType == typeof(SettingsPage))
                 {
                     NavView.SelectedItem = NavView.SettingsItem;

@@ -241,12 +241,12 @@
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource MinWindowSnapPoint}" />
                     </VisualState.StateTriggers>
-                    <VisualState.Setters>
+                    <!--<VisualState.Setters>
                         <Setter Target="EmailText.(RelativePanel.AlignLeftWithPanel)" Value="True" />
                         <Setter Target="EmailText.(RelativePanel.Below)" Value="CompanyText" />
                         <Setter Target="DetailPanel.Margin" Value="12,0,0,0" />
                         <Setter Target="MainCommandBar.DefaultLabelPosition" Value="Bottom"/>
-                    </VisualState.Setters>
+                    </VisualState.Setters>-->
                 </VisualState>
             </VisualStateGroup>
             <VisualStateGroup>

@@ -62,9 +62,9 @@
                     ToolTipService.ToolTip="{x:Bind UserListLabel}"
                     Icon="ContactInfo"/>
                 <muxc:NavigationViewItem
-                    x:Name="OrderListMenuItem"
-                    Content="{x:Bind OrderListLabel}" 
-                    ToolTipService.ToolTip="{x:Bind OrderListLabel}"
+                    x:Name="HistoryListMenuItem"
+                    Content="{x:Bind HistoryListLabel}" 
+                    ToolTipService.ToolTip="{x:Bind HistoryListLabel}"
                     Icon="Shop"/>
                 <muxc:NavigationViewItem
                     x:Name="ExportMenuItem"

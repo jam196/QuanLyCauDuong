@@ -31,6 +31,9 @@ namespace QuanLyCauDuong.ViewModels
         public ObservableCollection<UserViewModel> Users { get; }
              = new ObservableCollection<UserViewModel>();
 
+        public ObservableCollection<HistoryViewModel> Histories { get; }
+            = new ObservableCollection<HistoryViewModel>();
+
         private CustomerViewModel _selectedCustomer;
 
         /// <summary>
@@ -159,6 +162,30 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
+        /// Gets the complete list of bridges from the database.
+        /// </summary>
+        public async Task GetHistoryListAsync()
+        {
+            await dispatcherQueue.EnqueueAsync(() => IsLoading = true);
+
+            var histories = await App.Repository.Histories.GetAsync();
+            if (histories == null)
+            {
+                return;
+            }
+
+            await dispatcherQueue.EnqueueAsync(() =>
+            {
+                Histories.Clear();
+                foreach (var c in histories)
+                {
+                    Histories.Add(new HistoryViewModel(c));
+                }
+                IsLoading = false;
+            });
+        }
+
+        /// <summary>
         /// Saves any modified customers and reloads the customer list from the database.
         /// </summary>
         public void Sync()
@@ -211,6 +238,25 @@ namespace QuanLyCauDuong.ViewModels
                 }
 
                 await GetUserListAsync();
+                IsLoading = false;
+            });
+        }
+
+        /// <summary>
+        /// Saves any modified customers and reloads the customer list from the database.
+        /// </summary>
+        public void HistorySync()
+        {
+            Task.Run(async () =>
+            {
+                IsLoading = true;
+                foreach (var modifiedHistory in Histories
+                    .Where(history => history.IsModified).Select(history => history.Model))
+                {
+                    await App.Repository.Histories.UpsertAsync(modifiedHistory);
+                }
+
+                await GetHistoryListAsync();
                 IsLoading = false;
             });
         }

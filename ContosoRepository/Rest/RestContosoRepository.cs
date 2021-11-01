@@ -47,5 +47,7 @@ namespace Repository.Rest
         public IBridgeRepository Bridges => new RestBridgeRepository(_url);
 
         public IUserRepository Users => new RestUserRepository(_url);
+
+        public IHistoryRepository Histories => new RestHistoryRepository(_url);
     }
 }

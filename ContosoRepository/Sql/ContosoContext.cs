@@ -67,5 +67,10 @@ namespace Repository.Sql
         /// Gets the users DbSet.
         /// </summary>
         public DbSet<User> Users { get; set; }
+
+        /// <summary>
+        /// Gets the users DbSet.
+        /// </summary>
+        public DbSet<History> Histories { get; set; }
     }
 }

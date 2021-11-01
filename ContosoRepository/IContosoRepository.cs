@@ -52,5 +52,6 @@ namespace Repository
         IBridgeRepository Bridges { get; }
 
         IUserRepository Users { get; }
+        IHistoryRepository Histories { get; }
     }
 }

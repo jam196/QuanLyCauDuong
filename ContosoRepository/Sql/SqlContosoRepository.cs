@@ -59,5 +59,7 @@ namespace Repository.Sql
 
         public IUserRepository Users => new SqlUserRepository(
             new ContosoContext(_dbOptions));
+        public IHistoryRepository Histories => new SqlHistoryRepository(
+            new ContosoContext(_dbOptions));
     }
 }
