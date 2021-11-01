@@ -25,6 +25,21 @@ namespace QuanLyCauDuong.ViewModels
             }
         }
     }
+
+    public class Model
+    {
+        public string Month { get; set; }
+
+        public double Target { get; set; }
+
+        public Model(string xValue, double yValue)
+        {
+            Month = xValue;
+            Target = yValue;
+        }
+    }
+
+
     public class RecordingViewModel
     {
         private Recording defaultRecording = new Recording();
@@ -32,6 +47,9 @@ namespace QuanLyCauDuong.ViewModels
 
         private ObservableCollection<Recording> recordings = new ObservableCollection<Recording>();
         public ObservableCollection<Recording> Recordings { get { return this.recordings; } }
+
+        public ObservableCollection<Model> Data { get; set; }
+
         public RecordingViewModel()
         {
             this.recordings.Add(new Recording()
@@ -55,6 +73,15 @@ namespace QuanLyCauDuong.ViewModels
                 Glyph = ((char)0xF404).ToString(),
                 ReleaseDateTime = new DateTime(1737, 12, 3)
             });
+
+            Data = new ObservableCollection<Model>()
+        {
+            new Model("Jan", 50),
+            new Model("Feb", 70),
+            new Model("Mar", 65),
+            new Model("Apr", 57),
+            new Model("May", 48),
+        };
         }
     }
 }

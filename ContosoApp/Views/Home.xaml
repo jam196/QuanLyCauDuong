@@ -9,7 +9,7 @@
 
 
     <Grid>
-        <ItemsControl  ItemsSource="{x:Bind ViewModel.Recordings}">
+        <ItemsControl ItemsSource="{x:Bind ViewModel.Recordings}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate x:Name="IconTextTemplate2" x:DataType="local:Recording">
                     <StackPanel Width="350" Height="120" Padding="0" Orientation="Horizontal" AutomationProperties.Name="{x:Bind Title}">
