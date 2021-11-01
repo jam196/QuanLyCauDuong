@@ -30,5 +30,6 @@ namespace QuanLyCauDuong.Views
         }
 
         public RecordingViewModel ViewModel { get; set; }
+        public ChartViewModel ViewModelChart { get; set; }
     }
 }
