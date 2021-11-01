@@ -206,8 +206,11 @@ namespace QuanLyCauDuong.ViewModels
             }
             catch (Exception ex)
             {
-                ErrorText = ex.Message;
-                await SetVisibleAsync(vm => vm.ShowError);
+                if (!ex.Message.Contains("is part of a key and so cannot"))
+                {
+                    ErrorText = ex.Message;
+                    await SetVisibleAsync(vm => vm.ShowError);
+                }
             }
         }
 
@@ -341,6 +344,7 @@ namespace QuanLyCauDuong.ViewModels
                     SecondaryButtonText = "Hủy"
                 };
                 ApplicationData.Current.RoamingSettings.Values["IsLoggedIn"] = false;
+                ApplicationData.Current.RoamingSettings.Values["Email"] = "null@gmail.com";
                 await SetVisibleAsync(vm => vm.ShowWelcome);
                 await SignoutDialog.ShowAsync();
             }

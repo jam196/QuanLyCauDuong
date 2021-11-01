@@ -59,34 +59,6 @@ namespace Repository.Sql
 
         public async Task<User> UpsertAsync(User user)
         {
-            /*try
-            {
-                var current = await _db.Users.FirstOrDefaultAsync(_user => _user.Email == user.Email);
-                if (null == current)
-                {
-                    _db.Users.Add(user);
-                }
-                else
-                {
-                    _db.Entry(current).CurrentValues.SetValues(user);
-                }
-
-                try
-                {
-                    await _db.SaveChangesAsync();
-
-                    return user;
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }*/
-
             var current = await _db.Users.FirstOrDefaultAsync(_user => _user.Email == user.Email);
             if (null == current)
             {

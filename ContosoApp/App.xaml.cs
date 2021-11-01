@@ -1,4 +1,4 @@
-using QuanLyCauDuong.Views;
+﻿using QuanLyCauDuong.Views;
 using QuanLyCauDuong.ViewModels;
 using Repository;
 using Repository.Rest;
@@ -11,6 +11,8 @@ using Windows.Globalization;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Controls;
+using System;
 
 namespace QuanLyCauDuong
 {
@@ -38,7 +40,7 @@ namespace QuanLyCauDuong
         /// <summary>
         /// Invoked when the application is launched normally by the end user.
         /// </summary>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
             // Load the database.
             if (ApplicationData.Current.LocalSettings.Values.TryGetValue(
@@ -64,8 +66,16 @@ namespace QuanLyCauDuong
             {
                 // When the navigation stack isn't restored, navigate to the first page
                 // suppressing the initial entrance animation.
-                shell.AppFrame.Navigate(typeof(BridgeListPage), null,
-                    new SuppressNavigationTransitionInfo());
+                Models.User currentUser = await App.Repository.Users.GetByEmailAsync((string)ApplicationData.Current.RoamingSettings.Values["Email"]);
+
+                if (currentUser != null)
+                {
+                    shell.AppFrame.Navigate(typeof(BridgeListPage), null, new SuppressNavigationTransitionInfo());
+                }
+                else
+                {
+                    shell.AppFrame.Navigate(typeof(ExportPage), null, new SuppressNavigationTransitionInfo());
+                }
             }
 
             Window.Current.Activate();

@@ -47,6 +47,11 @@
 
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem
+                    x:Name="HomeMenuItem"
+                    Content="{x:Bind HomeLabel}" 
+                    ToolTipService.ToolTip="{x:Bind HomeLabel}"
+                    Icon="Home"/>
+                <muxc:NavigationViewItem
                     x:Name="BridgeListMenuItem"
                     Content="{x:Bind BridgeListLabel}" 
                     ToolTipService.ToolTip="{x:Bind BridgeListLabel}"
@@ -61,6 +66,11 @@
                     Content="{x:Bind OrderListLabel}" 
                     ToolTipService.ToolTip="{x:Bind OrderListLabel}"
                     Icon="Shop"/>
+                <muxc:NavigationViewItem
+                    x:Name="ExportMenuItem"
+                    Content="{x:Bind ExportLabel}" 
+                    ToolTipService.ToolTip="{x:Bind ExportLabel}"
+                    Icon="Paste"/>
             </muxc:NavigationView.MenuItems>
 
             <muxc:NavigationView.PaneFooter>

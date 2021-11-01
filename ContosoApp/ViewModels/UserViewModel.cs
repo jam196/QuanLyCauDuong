@@ -26,7 +26,7 @@ namespace QuanLyCauDuong.ViewModels
         /// <summary>
         /// Gets or sets the user's ID.
         /// </summary>
-        public Guid Id
+       /* public Guid Id
         {
             get => Model.Id;
             set
@@ -38,7 +38,7 @@ namespace QuanLyCauDuong.ViewModels
                     IsModified = true;
                 }
             }
-        }
+        }*/
 
         /// <summary>
         /// Lấy hoặc đặt đối tượng User.

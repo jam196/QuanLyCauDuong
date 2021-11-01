@@ -1,6 +1,7 @@
 ﻿using QuanLyCauDuong.Views;
 using System;
 using Windows.ApplicationModel.Core;
+using Windows.Storage;
 using Windows.System;
 using Windows.UI;
 using Windows.UI.ViewManagement;
@@ -94,6 +95,8 @@ namespace QuanLyCauDuong
             }
         }
 
+        public readonly string HomeLabel = "Dashboard";
+
         public readonly string BridgeListLabel = "Quản lý cầu";
 
         public readonly string CustomerListLabel = "Quản lý khách hàng";
@@ -102,21 +105,42 @@ namespace QuanLyCauDuong
 
         public readonly string OrderListLabel = "Quản lý hoạt động";
 
+        public readonly string ExportLabel = "Xuất dữ liệu";
+
         /// <summary>
         /// Navigates to the page corresponding to the tapped item.
         /// </summary>
-        private void NavigationView_ItemInvoked(muxc.NavigationView sender, muxc.NavigationViewItemInvokedEventArgs args)
+        private async void NavigationView_ItemInvoked(muxc.NavigationView sender, muxc.NavigationViewItemInvokedEventArgs args)
         {
             var label = args.InvokedItem as string;
             var pageType =
                 args.IsSettingsInvoked ? typeof(SettingsPage) :
                 label == CustomerListLabel ? typeof(CustomerListPage) :
                 label == UserListLabel ? typeof(UserListPage) :
+                label == ExportLabel ? typeof(ExportPage) :
+                label == HomeLabel ? typeof(Home) :
                 label == BridgeListLabel ? typeof(BridgeListPage) :
                 label == OrderListLabel ? typeof(OrderListPage) : null;
+
+            Models.User currentUser = await App.Repository.Users.GetByEmailAsync((string)ApplicationData.Current.RoamingSettings.Values["Email"]);
+
             if (pageType != null && pageType != AppFrame.CurrentSourcePageType)
             {
-                AppFrame.Navigate(pageType);
+                if (currentUser != null)
+                {
+                    AppFrame.Navigate(pageType);
+                }
+                else
+                {
+                    ContentDialog noWifiDialog = new ContentDialog
+                    {
+                        Title = "Bạn chưa đăng nhập",
+                        Content = "Vui lòng đăng nhập để sử dụng chức năng này",
+                        CloseButtonText = "Ok"
+                    };
+
+                    await noWifiDialog.ShowAsync();
+                }
             }
         }
 
@@ -129,12 +153,20 @@ namespace QuanLyCauDuong
             if (e.NavigationMode == NavigationMode.Back)
             {
                 /*if (e.SourcePageType == typeof(CustomerListPage))
-                {
-                    NavView.SelectedItem = CustomerListMenuItem;
-                }*/
+              {
+                  NavView.SelectedItem = CustomerListMenuItem;
+              }*/
                 if (e.SourcePageType == typeof(UserListPage))
                 {
                     NavView.SelectedItem = UserListMenuItem;
+                }
+                else if (e.SourcePageType == typeof(Home))
+                {
+                    NavView.SelectedItem = HomeMenuItem;
+                }
+                else if (e.SourcePageType == typeof(ExportPage))
+                {
+                    NavView.SelectedItem = ExportMenuItem;
                 }
                 else if (e.SourcePageType == typeof(OrderListPage))
                 {

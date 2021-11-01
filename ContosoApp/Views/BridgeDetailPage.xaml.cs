@@ -75,6 +75,16 @@ namespace QuanLyCauDuong.Views
                     bridge => bridge.Model.Id == (Guid)e.Parameter).First();
             }
 
+            if (ViewModel.StartTime == null)
+            {
+                StartTime.Date = new DateTime(2019, 31, 10);
+            }
+
+            if (ViewModel.EndTime == null)
+            {
+                EndTime.Date = new DateTime(2021, 31, 10);
+            }
+
             ViewModel.AddNewBridgeCanceled += AddNewBridgeCanceled;
             base.OnNavigatedTo(e);
         }

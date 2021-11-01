@@ -110,16 +110,16 @@
                                 Header="Thời gian bắt đầu xây dựng"
                                 RelativePanel.AlignLeftWithPanel="True"
                                 RelativePanel.Below="Name"
+                                Language="vi-VN"
                                 Date="{x:Bind ViewModel.StartTime, Mode=TwoWay}"/>
-                        <TextBox
-                                x:Name="EndTime"
+                        <CalendarDatePicker x:Name="EndTime"
                                 MinWidth="250"
                                 Margin="0,8,16,8"
                                 Header="Thời gian hoàn thành xây dựng"
-                                IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.Below="Name"
+                                Language="vi-VN"
                                 RelativePanel.RightOf="StartTime"
-                                Text="{x:Bind ViewModel.EndTime, Mode=TwoWay}" />
+                                Date="{x:Bind ViewModel.EndTime, Mode=TwoWay}"/>
                         <TextBox
                                 x:Name="DesignLoad"
                                 MinWidth="250"
