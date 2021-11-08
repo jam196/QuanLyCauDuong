@@ -64,7 +64,7 @@ namespace QuanLyCauDuong.ViewModels
         /// </summary>
         public string Name
         {
-            get => Model.Name;
+            get => Model?.Name;
             set
             {
                 if (value != Model.Name)

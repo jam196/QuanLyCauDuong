@@ -12,8 +12,8 @@
         <ItemsControl ItemsSource="{x:Bind ViewModel.Recordings}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate x:Name="IconTextTemplate2" x:DataType="local:Recording">
-                    <StackPanel Width="350" Height="120" Padding="0" Orientation="Horizontal" AutomationProperties.Name="{x:Bind Title}">
-                        <FontIcon Margin="0,6,0,0" FontSize="68" FontFamily="Segoe MDL2 Assets" FontWeight="Bold" Glyph="{x:Bind Glyph}" VerticalAlignment="Top"/>
+                    <StackPanel Width="300" Height="120" Padding="0" Orientation="Horizontal" AutomationProperties.Name="{x:Bind Title}">
+                        <FontIcon Foreground="#005fb8" Margin="0,6,0,0" FontSize="48" FontFamily="Segoe MDL2 Assets" FontWeight="Bold" Glyph="{x:Bind Glyph}" VerticalAlignment="Top"/>
                         <StackPanel Margin="16,1,0,0">
                             <TextBlock Width="200" FontSize="20" Margin="0,0,0,2" TextWrapping="WrapWholeWords" TextTrimming="Clip" Text="{x:Bind Title}"/>
                             <TextBlock Width="200" Height="80" FontSize="25" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}" TextWrapping="WrapWholeWords" TextTrimming="Clip" Text="{x:Bind Value}" />
@@ -23,7 +23,7 @@
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <ItemsWrapGrid MaximumRowsOrColumns="3" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10"/>
+                    <ItemsWrapGrid MaximumRowsOrColumns="6" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>

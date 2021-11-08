@@ -73,6 +73,27 @@ namespace QuanLyCauDuong.ViewModels
                 Glyph = ((char)0xF404).ToString(),
                 ReleaseDateTime = new DateTime(1737, 12, 3)
             });
+            this.recordings.Add(new Recording()
+            {
+                Value = "20",
+                Title = "Số cầu đang xây dựng",
+                Glyph = ((char)0xE7C0).ToString(),
+                ReleaseDateTime = new DateTime(1737, 12, 3)
+            });
+            this.recordings.Add(new Recording()
+            {
+                Value = "16",
+                Title = "Số cầu đã hoàn thành",
+                Glyph = ((char)0xE706).ToString(),
+                ReleaseDateTime = new DateTime(1737, 12, 3)
+            });
+            this.recordings.Add(new Recording()
+            {
+                Value = "3",
+                Title = "Số cầu cần nâng cấp",
+                Glyph = ((char)0xE791).ToString(),
+                ReleaseDateTime = new DateTime(1737, 12, 3)
+            });
 
             Data = new ObservableCollection<Model>()
         {
