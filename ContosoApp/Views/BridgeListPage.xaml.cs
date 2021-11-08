@@ -247,5 +247,33 @@ namespace QuanLyCauDuong.Views
                 }
             });
         }
+
+        private async void FilterErrorBridges_Click(object sender, RoutedEventArgs e)
+        {
+            var matches = ViewModel.CloneBridges.Where(bridge => bridge.Status == "Đang bảo trì").ToList();
+
+            await dispatcherQueue.EnqueueAsync(() =>
+            {
+                ViewModel.Bridges.Clear();
+                foreach (var match in matches)
+                {
+                    ViewModel.Bridges.Add(match);
+                }
+            });
+        }
+
+        private async void FilterWorkingBridges_Click(object sender, RoutedEventArgs e)
+        {
+            var matches = ViewModel.CloneBridges.Where(bridge => bridge.Status == "Hoạt động tốt").ToList();
+
+            await dispatcherQueue.EnqueueAsync(() =>
+            {
+                ViewModel.Bridges.Clear();
+                foreach (var match in matches)
+                {
+                    ViewModel.Bridges.Add(match);
+                }
+            });
+        }
     }
 }

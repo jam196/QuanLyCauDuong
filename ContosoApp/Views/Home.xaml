@@ -27,5 +27,6 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
+        <Image Width="650" Source="https://quickchart.io/chart?c={type:'doughnut',data:{labels:['Cầu đang xây dựng','Cầu đang bảo trì','Cầu hoạt động tốt'],datasets:[{data:[50,60,70], backgroundColor: [ 'rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', ]}]},options:{plugins:{doughnutlabel:{labels:[{text:'',font:{size:20}},{text:'Thống kê cầu'}]}}}}"/>
     </Grid>
 </Page>
