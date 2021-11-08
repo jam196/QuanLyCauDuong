@@ -61,7 +61,7 @@ namespace QuanLyCauDuong.Views
             switch (radio.Tag)
             {
                 case "Sqlite": App.UseSqlite(); break;
-                case "Rest": App.UseRest(); break;
+                /*case "Rest": App.UseRest(); break;*/
                 default: throw new NotImplementedException();
             }
             ApplicationData.Current.LocalSettings.Values[DataSourceKey] = radio.Tag;

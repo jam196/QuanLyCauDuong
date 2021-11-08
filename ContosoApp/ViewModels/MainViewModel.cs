@@ -20,12 +20,15 @@ namespace QuanLyCauDuong.ViewModels
         public MainViewModel() => Task.Run(GetCustomerListAsync);
 
         /// <summary>
-        /// The collection of customers in the list. 
+        /// The collection of bridges in the list. 
         /// </summary>
         public ObservableCollection<CustomerViewModel> Customers { get; }
             = new ObservableCollection<CustomerViewModel>();
 
         public ObservableCollection<BridgeViewModel> Bridges { get; }
+            = new ObservableCollection<BridgeViewModel>();
+
+        public ObservableCollection<BridgeViewModel> CloneBridges { get; set; }
             = new ObservableCollection<BridgeViewModel>();
 
         public ObservableCollection<UserViewModel> Users { get; }
@@ -133,6 +136,8 @@ namespace QuanLyCauDuong.ViewModels
                 {
                     Bridges.Add(new BridgeViewModel(c));
                 }
+
+                CloneBridges = Bridges;
                 IsLoading = false;
             });
         }

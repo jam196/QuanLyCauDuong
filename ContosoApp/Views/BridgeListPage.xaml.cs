@@ -70,20 +70,20 @@ namespace QuanLyCauDuong.Views
                     string[] parameters = sender.Text.Split(new char[] { ' ' },
                         StringSplitOptions.RemoveEmptyEntries);
                     sender.ItemsSource = ViewModel.Bridges
-                        .Where(bridge => parameters.Any(parameter =>
-                            bridge.Name.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                            bridge.Investor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
-                            bridge.Supervisor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
-                        .OrderByDescending(bridge => parameters.Count(parameter =>
-                            bridge.Manager.StartsWith(parameter) ||
-                            bridge.Location.StartsWith(parameter) ||
-                            bridge.Designer.StartsWith(parameter)))
-                        .Select(bridge => $"{bridge.Name} {bridge.Investor}");
+                         .Where(bridge => parameters.Any(parameter =>
+                             bridge.Name.Contains(parameter) ||
+                             bridge.Name.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                             bridge.Investor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                             bridge.Supervisor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
+                         .OrderByDescending(bridge => parameters.Count(parameter =>
+                             bridge.Name.StartsWith(parameter) ||
+                             bridge.Investor.StartsWith(parameter)))
+                         .Select(bridge => $"{bridge.Name}");
                 }
             }
         }
 
-        /// Filters or resets the customer list based on the search text.
+        /// Lọc hoặc reset danh sách cầu theo từ khóa tìm kiếm.
         /// </summary>
         private async void BridgeSearchBox_QuerySubmitted(AutoSuggestBox sender,
             AutoSuggestBoxQuerySubmittedEventArgs args)
@@ -99,7 +99,7 @@ namespace QuanLyCauDuong.Views
         }
 
         /// <summary>
-        /// Resets the customer list.
+        /// Reset danh sách cầu.
         /// </summary>
         private async Task ResetBridgeList()
         {
@@ -107,7 +107,7 @@ namespace QuanLyCauDuong.Views
         }
 
         /// <summary>
-        /// Filters the customer list based on the search text.
+        /// Lọc danh sách cầu dựa trên từ khóa tìm kiếm.
         /// </summary>
         private async Task FilterBridgeList(string text)
         {
@@ -116,13 +116,15 @@ namespace QuanLyCauDuong.Views
 
             var matches = ViewModel.Bridges.Where(bridge => parameters
                 .Any(parameter =>
-                    bridge.Name.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                    bridge.Name.Contains(parameter) ||
                     bridge.Investor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
+                    bridge.Builder.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
                     bridge.Supervisor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase)))
                 .OrderByDescending(bridge => parameters.Count(parameter =>
-                    bridge.Manager.StartsWith(parameter) ||
-                    bridge.Location.StartsWith(parameter) ||
-                    bridge.Designer.StartsWith(parameter)))
+                    bridge.Name.StartsWith(parameter) ||
+                    bridge.Investor.StartsWith(parameter) ||
+                    bridge.Builder.StartsWith(parameter) ||
+                    bridge.Supervisor.StartsWith(parameter)))
                 .ToList();
 
             await dispatcherQueue.EnqueueAsync(() =>
@@ -136,7 +138,7 @@ namespace QuanLyCauDuong.Views
         }
 
         /// <summary>
-        /// Resets the bridge list when leaving the page.
+        /// Reset danh sách cầu khi chuyển trang.
         /// </summary>
         protected async override void OnNavigatedFrom(NavigationEventArgs e)
         {
@@ -171,7 +173,7 @@ namespace QuanLyCauDuong.Views
         }
 
         /// <summary>
-        /// Deletes the currently selected order.
+        /// Xóa cầu đang chọn.
         /// </summary>
         private async void DeleteBridge_Click(object sender, RoutedEventArgs e)
         {
@@ -199,7 +201,7 @@ namespace QuanLyCauDuong.Views
                     new DrillInNavigationTransitionInfo());
 
         /// <summary>
-        /// Navigates to a blank bridge details page for the user to fill in.
+        /// Chuyển đến trang thêm mới cầu.
         /// </summary>
         private void CreateBridge_Click(object sender, RoutedEventArgs e) =>
             Frame.Navigate(typeof(BridgeDetailPage), null, new DrillInNavigationTransitionInfo());
@@ -221,20 +223,29 @@ namespace QuanLyCauDuong.Views
         }
 
         /// <summary>
-        /// Selects the tapped bridge. 
+        /// Chuột phải lên cầu. 
         /// </summary>
         private void DataGrid_RightTapped(object sender, RightTappedRoutedEventArgs e) =>
             ViewModel.SelectedBridge = (e.OriginalSource as FrameworkElement).DataContext as BridgeViewModel;
 
         /// <summary>
-        /// Sorts the data in the DataGrid.
+        /// Sắp xếp data trong bảng.
         /// </summary>
         private void DataGrid_Sorting(object sender, DataGridColumnEventArgs e) =>
             (sender as DataGrid).Sort(e.Column, ViewModel.Bridges.Sort);
 
         private async void FilterBuidlingBridges_Click(object sender, RoutedEventArgs e)
         {
-            await dispatcherQueue.EnqueueAsync(async () => await ViewModel.GetBuildingBridgeListAsync());
+            var matches = ViewModel.CloneBridges.Where(bridge => bridge.Status == "Đang xây dựng").ToList();
+
+            await dispatcherQueue.EnqueueAsync(() =>
+            {
+                ViewModel.Bridges.Clear();
+                foreach (var match in matches)
+                {
+                    ViewModel.Bridges.Add(match);
+                }
+            });
         }
     }
 }

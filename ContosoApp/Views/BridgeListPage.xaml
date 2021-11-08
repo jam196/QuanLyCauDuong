@@ -52,9 +52,9 @@
                     Label="Thêm cầu"
                     ToolTipService.ToolTip="Thêm cầu" />
             <AppBarButton
-                    Click="{x:Bind ViewModel.BridgeSync}"
+                    Click="{x:Bind ViewModel.GetBridgeListAsync}"
                     Icon="Refresh"
-                    Label="Đồng bộ data"
+                    Label="Refresh"
                     ToolTipService.ToolTip="Sync with server" />
         </CommandBar>
 
