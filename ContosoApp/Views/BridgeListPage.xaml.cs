@@ -231,5 +231,10 @@ namespace QuanLyCauDuong.Views
         /// </summary>
         private void DataGrid_Sorting(object sender, DataGridColumnEventArgs e) =>
             (sender as DataGrid).Sort(e.Column, ViewModel.Bridges.Sort);
+
+        private async void FilterBuidlingBridges_Click(object sender, RoutedEventArgs e)
+        {
+            await dispatcherQueue.EnqueueAsync(async () => await ViewModel.GetBuildingBridgeListAsync());
+        }
     }
 }

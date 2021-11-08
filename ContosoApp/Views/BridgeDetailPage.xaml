@@ -62,8 +62,7 @@
                 VerticalScrollBarVisibility="Auto"
                 VerticalScrollMode="Auto">
 
-            <StackPanel 
-                    Margin="0,8,4,0">
+            <StackPanel Margin="0,8,4,0">
                 <StackPanel.Resources>
                     <Style TargetType="muxc:Expander">
                         <Setter Property="HorizontalAlignment" Value="Stretch"/>

@@ -48,7 +48,7 @@ namespace QuanLyCauDuong
             {
                 switch (dataSource.ToString())
                 {
-                    case "Rest": UseRest(); break;
+                    /*case "Rest": UseRest(); break;*/
                     default: UseSqlite(); break;
                 }
             }
@@ -102,7 +102,7 @@ namespace QuanLyCauDuong
         /// Configures the app to use the REST data source. For convenience, a read-only source is provided. 
         /// You can also deploy your own copy of the REST service locally or to Azure. See the README for details.
         /// </summary>
-        public static void UseRest() =>
-            Repository = new RestContosoRepository("https://customers-orders-api-prod.azurewebsites.net/api/");
+        /*public static void UseRest() =>
+            Repository = new RestContosoRepository("https://customers-orders-api-prod.azurewebsites.net/api/");*/
     }
 }

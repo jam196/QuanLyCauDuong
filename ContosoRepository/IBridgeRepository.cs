@@ -14,6 +14,8 @@ namespace Models
         /// </summary>
         Task<IEnumerable<Bridge>> GetAsync();
 
+        Task<IEnumerable<Bridge>> GetWithCustomQueryAsync();
+
         /// <summary>
         /// Lấy danh sách cầu + search. 
         /// </summary>

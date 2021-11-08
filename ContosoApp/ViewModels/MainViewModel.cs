@@ -140,6 +140,30 @@ namespace QuanLyCauDuong.ViewModels
         /// <summary>
         /// Gets the complete list of bridges from the database.
         /// </summary>
+        public async Task GetBuildingBridgeListAsync()
+        {
+            await dispatcherQueue.EnqueueAsync(() => IsLoading = true);
+
+            var bridges = await App.Repository.Bridges.GetWithCustomQueryAsync();
+            if (bridges == null)
+            {
+                return;
+            }
+
+            await dispatcherQueue.EnqueueAsync(() =>
+            {
+                Bridges.Clear();
+                foreach (var c in bridges)
+                {
+                    Bridges.Add(new BridgeViewModel(c));
+                }
+                IsLoading = false;
+            });
+        }
+
+        /// <summary>
+        /// Gets the complete list of bridges from the database.
+        /// </summary>
         public async Task GetUserListAsync()
         {
             await dispatcherQueue.EnqueueAsync(() => IsLoading = true);

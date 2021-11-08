@@ -1,4 +1,4 @@
-﻿//  ---------------------------------------------------------------------------------
+﻿/*//  ---------------------------------------------------------------------------------
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 // 
 //  The MIT License (MIT)
@@ -44,10 +44,11 @@ namespace Repository.Rest
 
         public IProductRepository Products => new RestProductRepository(_url);
 
-        public IBridgeRepository Bridges => new RestBridgeRepository(_url);
+        *//*public IBridgeRepository Bridges => new RestBridgeRepository(_url);*//*
 
         public IUserRepository Users => new RestUserRepository(_url);
 
         public IHistoryRepository Histories => new RestHistoryRepository(_url);
     }
 }
+*/

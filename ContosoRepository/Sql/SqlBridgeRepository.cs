@@ -34,6 +34,14 @@ namespace Repository.Sql
                 .FirstOrDefaultAsync(bridge => bridge.Id == id);
         }
 
+        public async Task<IEnumerable<Bridge>> GetWithCustomQueryAsync()
+        {
+            return await _db.Bridges
+                .Where(bridge => bridge.Status == "Đang xây dựng")
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Bridge>> GetAsync(string value)
         {
             string[] parameters = value.Split(' ');
