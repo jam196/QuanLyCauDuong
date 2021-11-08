@@ -472,6 +472,16 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
+        /// Sets the Status property by parsing a string representation of the enum value.
+        /// </summary>
+        public String SetBridgeInvestor(object value) => Investor = value as string;
+        public String SetBridgeStatus(object value) => Status = value as string;
+        public String SetBridgeDesigner(object value) => Designer = value as string;
+        public String SetBridgeBuilder(object value) => Builder = value as string;
+        public String SetBridgeManager(object value) => Builder = value as string;
+        public String SetBridgeSupervisor(object value) => Supervisor = value as string;
+
+        /// <summary>
         /// Called when a bound DataGrid control causes the customer to enter edit mode.
         /// </summary>
         public void BeginEdit()

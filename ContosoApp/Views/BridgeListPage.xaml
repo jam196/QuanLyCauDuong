@@ -81,7 +81,9 @@
                     </Grid>
                 </muxc:Expander.Header>
                 <RelativePanel Margin="8,0,0,12">
-                    <Button Margin="0,0,16,8" x:Name="FilterBuidlingBridges" Click="FilterBuidlingBridges_Click" Content="Cầu đang xây dựng" RelativePanel.AlignLeftWithPanel="True" MinWidth="200" MinHeight="30" Style="{StaticResource AccentButtonStyle}"/>
+                    <Button Margin="0,0,16,8" x:Name="FilterBuidlingBridges" Click="FilterBuidlingBridges_Click" Content="Cầu đang xây dựng" RelativePanel.AlignLeftWithPanel="True" MinHeight="30" Style="{StaticResource AccentButtonStyle}"/>
+                    <Button Margin="0,0,16,8" x:Name="FilterErrorBridges" Click="FilterBuidlingBridges_Click" Content="Cầu đang bảo trì" RelativePanel.RightOf="FilterBuidlingBridges" MinHeight="30" Style="{StaticResource AccentButtonStyle}"/>
+                    <Button Margin="0,0,16,8" x:Name="FilterWorkingBridges" Click="FilterBuidlingBridges_Click" Content="Cầu đang hoạt động tốt" RelativePanel.RightOf="FilterErrorBridges" MinHeight="30" Style="{StaticResource AccentButtonStyle}"/>
                 </RelativePanel>
             </muxc:Expander>
         </StackPanel>

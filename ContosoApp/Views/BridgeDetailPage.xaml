@@ -102,7 +102,7 @@
                                 Text="{x:Bind ViewModel.TotalInvestment, Mode=TwoWay}" />
                         <ComboBox x:Name="Investor" Header="Chủ đầu tư" Margin="0,8,16,8" MinWidth="250"
                         RelativePanel.RightOf="TotalInvestment"
-                        ItemsSource="{x:Bind Investors}" SelectedValue="{x:Bind ViewModel.Investor, Mode=TwoWay}"/>
+                        ItemsSource="{x:Bind Investors}" SelectedValue="{x:Bind ViewModel.Investor.ToString(), BindBack=ViewModel.SetBridgeInvestor, Mode=TwoWay}"/>
                         <CalendarDatePicker x:Name="StartTime"
                                 MinWidth="250"
                                 Margin="0,8,16,8"
@@ -131,25 +131,25 @@
                                 RelativePanel.RightOf="EndTime"
                                 Text="{x:Bind ViewModel.DesignLoad, Mode=TwoWay}" />
 
-                        <ComboBox x:Name="Status" IsEditable="true" IsTextSearchEnabled="True" Header="Trạng thái" Margin="0,8,16,8" MinWidth="250"
+                        <ComboBox x:Name="Status" IsTextSearchEnabled="True" Header="Trạng thái" Margin="0,8,16,8" MinWidth="250"
                         RelativePanel.Below="Name" RelativePanel.RightOf="DesignLoad"
-                        ItemsSource="{x:Bind Statuses}" SelectedValue="{x:Bind ViewModel.Status, Mode=TwoWay}"/>
+                        ItemsSource="{x:Bind Statuses}" SelectedValue="{x:Bind ViewModel.Status.ToString(), BindBack=ViewModel.SetBridgeStatus, Mode=TwoWay}"/>
 
-                        <ComboBox x:Name="Designer" IsEditable="true" IsTextSearchEnabled="True" Header="Đơn vị thiết kế" Margin="0,8,16,8" MinWidth="250"
+                        <ComboBox x:Name="Designer" IsTextSearchEnabled="True" Header="Đơn vị thiết kế" Margin="0,8,16,8" MinWidth="250"
                         RelativePanel.Below="StartTime" RelativePanel.AlignLeftWithPanel="True"
-                        ItemsSource="{x:Bind Designers}" SelectedValue="{x:Bind ViewModel.Designer, Mode=TwoWay}"/>
+                        ItemsSource="{x:Bind Designers}" SelectedValue="{x:Bind ViewModel.Designer.ToString(), BindBack=ViewModel.SetBridgeDesigner, Mode=TwoWay}"/>
 
-                        <ComboBox x:Name="Builder" IsEditable="False" IsTextSearchEnabled="True" Header="Đơn vị thi công" Margin="0,8,16,8" MinWidth="250"
+                        <ComboBox x:Name="Builder" IsTextSearchEnabled="True" Header="Đơn vị thi công" Margin="0,8,16,8" MinWidth="250"
                         RelativePanel.Below="StartTime" RelativePanel.RightOf="Designer" 
-                        ItemsSource="{x:Bind Builders}" SelectedValue="{x:Bind ViewModel.Builder, Mode=TwoWay}"/>
+                        ItemsSource="{x:Bind Builders}" SelectedValue="{x:Bind ViewModel.Builder.ToString(), BindBack=ViewModel.SetBridgeBuilder, Mode=TwoWay}"/>
 
-                        <ComboBox x:Name="Manager" IsEditable="False" IsTextSearchEnabled="True" Header="Đơn vị quản lý" Margin="0,8,16,8" MinWidth="250"
+                        <ComboBox x:Name="Manager" IsTextSearchEnabled="True" Header="Đơn vị quản lý" Margin="0,8,16,8" MinWidth="250"
                         RelativePanel.Below="StartTime" RelativePanel.RightOf="Builder"
-                        ItemsSource="{x:Bind Managers}" SelectedValue="{x:Bind ViewModel.Manager, Mode=TwoWay}"/>
+                        ItemsSource="{x:Bind Managers}" SelectedValue="{x:Bind ViewModel.Manager.ToString(), BindBack=ViewModel.SetBridgeManager, Mode=TwoWay}"/>
 
-                        <ComboBox x:Name="Supervisor" IsEditable="False" IsTextSearchEnabled="True" Header="Đơn vị giám sát" Margin="0,8,16,8" MinWidth="250"
+                        <ComboBox x:Name="Supervisor" IsTextSearchEnabled="True" Header="Đơn vị giám sát" Margin="0,8,16,8" MinWidth="250"
                         RelativePanel.Below="StartTime" RelativePanel.RightOf="Manager"
-                        ItemsSource="{x:Bind Supervisors}" SelectedValue="{x:Bind ViewModel.Supervisor, Mode=TwoWay}"/>
+                        ItemsSource="{x:Bind Supervisors}" SelectedValue="{x:Bind ViewModel.Supervisor.ToString(), BindBack=ViewModel.SetBridgeSupervisor, Mode=TwoWay}"/>
                     </RelativePanel>
 
                 </muxc:Expander>
