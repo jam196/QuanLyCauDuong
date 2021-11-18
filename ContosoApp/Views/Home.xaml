@@ -6,17 +6,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls" xmlns:local="using:QuanLyCauDuong.ViewModels"
     mc:Ignorable="d">
-
-
     <Grid>
-        <ItemsControl ItemsSource="{x:Bind ViewModel.Recordings}">
+        <ItemsControl ItemsSource="{x:Bind ViewModel.Items}">
             <ItemsControl.ItemTemplate>
-                <DataTemplate x:Name="IconTextTemplate2" x:DataType="local:Recording">
+                <DataTemplate x:Name="IconTextTemplate2" x:DataType="local:ItemModel">
                     <StackPanel Width="300" Height="120" Padding="0" Orientation="Horizontal" AutomationProperties.Name="{x:Bind Title}">
                         <FontIcon Foreground="#005fb8" Margin="0,6,0,0" FontSize="48" FontFamily="Segoe MDL2 Assets" FontWeight="Bold" Glyph="{x:Bind Glyph}" VerticalAlignment="Top"/>
                         <StackPanel Margin="16,1,0,0">
-                            <TextBlock Width="200" FontSize="20" Margin="0,0,0,2" TextWrapping="WrapWholeWords" TextTrimming="Clip" Text="{x:Bind Title}"/>
-                            <TextBlock Width="200" Height="80" FontSize="25" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}" TextWrapping="WrapWholeWords" TextTrimming="Clip" Text="{x:Bind Value}" />
+                            <TextBlock Width="230" FontSize="20" Margin="0,0,0,2" TextWrapping="WrapWholeWords" TextTrimming="Clip" Text="{x:Bind Title}"/>
+                            <TextBlock Width="230" Height="80" FontSize="25" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}" TextWrapping="WrapWholeWords" TextTrimming="Clip" Text="{x:Bind Value}" />
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
@@ -27,6 +25,6 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <Image Width="650" Source="https://quickchart.io/chart?c={type:'doughnut',data:{labels:['Cầu đang xây dựng','Cầu đang bảo trì','Cầu hoạt động tốt'],datasets:[{data:[50,60,70], backgroundColor: [ 'rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', ]}]},options:{plugins:{doughnutlabel:{labels:[{text:'',font:{size:20}},{text:'Thống kê cầu'}]}}}}"/>
+        <Image HorizontalAlignment="Left" Width="700" Margin="0,80,0,0" Source="{x:Bind ViewModel.ChartUrl}"/>
     </Grid>
 </Page>

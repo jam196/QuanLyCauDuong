@@ -17,6 +17,8 @@ namespace Models
         // Tổng mức đầu tư
         public float TotalInvestment { get; set; }
 
+        public float MaintenanceCost { get; set; }
+
         // Tải trọng thiết kế
         public float DesignLoad { get; set; }
 

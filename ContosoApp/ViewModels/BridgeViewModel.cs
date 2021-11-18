@@ -67,7 +67,7 @@ namespace QuanLyCauDuong.ViewModels
             get => Model?.Name;
             set
             {
-                if (value != Model.Name)
+                if (value != Model?.Name)
                 {
                     Model.Name = value;
                     IsModified = true;
@@ -109,6 +109,24 @@ namespace QuanLyCauDuong.ViewModels
                     IsModified = true;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TotalInvestment));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get/set thông tin tổng đầu tư cầu.
+        /// </summary>
+        public string MaintenanceCost
+        {
+            get => Model?.MaintenanceCost.ToString();
+            set
+            {
+                if (value != Model?.MaintenanceCost.ToString())
+                {
+                    Model.MaintenanceCost = float.Parse(value);
+                    IsModified = true;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(MaintenanceCost));
                 }
             }
         }
@@ -478,7 +496,7 @@ namespace QuanLyCauDuong.ViewModels
         public String SetBridgeStatus(object value) => Status = value as string;
         public String SetBridgeDesigner(object value) => Designer = value as string;
         public String SetBridgeBuilder(object value) => Builder = value as string;
-        public String SetBridgeManager(object value) => Builder = value as string;
+        public String SetBridgeManager(object value) => Manager = value as string;
         public String SetBridgeSupervisor(object value) => Supervisor = value as string;
 
         /// <summary>

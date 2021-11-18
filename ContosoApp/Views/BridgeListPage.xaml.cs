@@ -275,5 +275,43 @@ namespace QuanLyCauDuong.Views
                 }
             });
         }
+
+        private void ExportToExcel_Click(object sender, RoutedEventArgs e)
+        {
+            /*using (ExcelEngine excelEngine = new ExcelEngine())
+            {
+                IApplication application = excelEngine.Excel;
+                application.DefaultVersion = ExcelVersion.Excel2016;
+
+                //Create a new workbook
+                IWorkbook workbook = application.Workbooks.Create(1);
+                IWorksheet sheet = workbook.Worksheets[0];
+
+                //Create a dataset from XML file
+                DataSet customersDataSet = new DataSet();
+                customersDataSet.ReadXml(Path.GetFullPath(@"../../Data/Employees.xml"));
+
+                //Create datatable from the dataset
+                DataTable dataTable = new DataTable();
+                dataTable = customersDataSet.Tables[0];
+
+                //Import data from the data table with column header, at first row and first column, 
+                //and by its column type.
+                sheet.ImportDataTable(dataTable, true, 1, 1, true);
+
+                //Creating Excel table or list object and apply style to the table
+                IListObject table = sheet.ListObjects.Create("Employee_PersonalDetails", sheet.UsedRange);
+
+                table.BuiltInTableStyle = TableBuiltInStyles.TableStyleMedium14;
+
+                //Autofit the columns
+                sheet.UsedRange.AutofitColumns();
+
+                //Save the file in the given path
+                Stream excelStream = File.Create(Path.GetFullPath(@"Output.xlsx"));
+                workbook.SaveAs(excelStream);
+                excelStream.Dispose();
+            }*/
+        }
     }
 }

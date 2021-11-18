@@ -84,25 +84,34 @@
                     </muxc:Expander.Header>
 
                     <RelativePanel Margin="8,0,0,12">
-                        <TextBox
-                                x:Name="Name"
+                        <TextBox x:Name="Name"
                                 MinWidth="250"
                                 Margin="0,8,16,8"
                                 Header="Tên cầu"
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.AlignLeftWithPanel="True"
                                 Text="{x:Bind ViewModel.Name, Mode=TwoWay}" />
-                        <TextBox
-                                x:Name="TotalInvestment"
+
+                        <TextBox x:Name="TotalInvestment"
                                 MinWidth="250"
                                 Margin="0,8,16,8"
                                 Header="Tổng đầu tư (tỷ)"
                                 IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
                                 RelativePanel.RightOf="Name"
                                 Text="{x:Bind ViewModel.TotalInvestment, Mode=TwoWay}" />
-                        <ComboBox x:Name="Investor" Header="Chủ đầu tư" Margin="0,8,16,8" MinWidth="250"
+
+                        <ComboBox x:Name="Investor" IsEditable="False" IsTextSearchEnabled="True" Header="Chủ đầu tư" Margin="0,8,16,8" MinWidth="250"
                         RelativePanel.RightOf="TotalInvestment"
                         ItemsSource="{x:Bind Investors}" SelectedValue="{x:Bind ViewModel.Investor.ToString(), BindBack=ViewModel.SetBridgeInvestor, Mode=TwoWay}"/>
+
+                        <TextBox x:Name="MaintenanceCost"
+                                MinWidth="250"
+                                Margin="0,8,16,8"
+                                Header="Chi phí bảo trì"
+                                IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
+                                RelativePanel.RightOf="Investor"
+                                Text="{x:Bind ViewModel.MaintenanceCost, Mode=TwoWay}" />
+
                         <CalendarDatePicker x:Name="StartTime"
                                 MinWidth="250"
                                 Margin="0,8,16,8"
@@ -112,6 +121,7 @@
                                 PlaceholderText="Chọn ngày"
                                 Language="vi-VN"
                                 Date="{x:Bind ViewModel.StartTime, Mode=TwoWay}"/>
+
                         <CalendarDatePicker x:Name="EndTime"
                                 MinWidth="250"
                                 Margin="0,8,16,8"
@@ -121,8 +131,8 @@
                                 Language="vi-VN"
                                 RelativePanel.RightOf="StartTime"
                                 Date="{x:Bind ViewModel.EndTime, Mode=TwoWay}"/>
-                        <TextBox
-                                x:Name="DesignLoad"
+
+                        <TextBox x:Name="DesignLoad"
                                 MinWidth="250"
                                 Margin="0,8,16,8"
                                 Header="Tải trọng thiết kế (tấn)"
@@ -131,25 +141,20 @@
                                 RelativePanel.RightOf="EndTime"
                                 Text="{x:Bind ViewModel.DesignLoad, Mode=TwoWay}" />
 
-                        <ComboBox x:Name="Status" IsTextSearchEnabled="True" Header="Trạng thái" Margin="0,8,16,8" MinWidth="250"
-                        RelativePanel.Below="Name" RelativePanel.RightOf="DesignLoad"
-                        ItemsSource="{x:Bind Statuses}" SelectedValue="{x:Bind ViewModel.Status.ToString(), BindBack=ViewModel.SetBridgeStatus, Mode=TwoWay}"/>
+                        <ComboBox x:Name="Status" IsEnabled="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" IsEditable="True" IsTextSearchEnabled="True" Header="Trạng thái" Margin="0,8,16,8" MinWidth="250"
+                        RelativePanel.Below="Name" RelativePanel.RightOf="DesignLoad" ItemsSource="{x:Bind Statuses}" SelectedValue="{x:Bind ViewModel.Status.ToString(), BindBack=ViewModel.SetBridgeStatus, Mode=TwoWay}"/>
 
-                        <ComboBox x:Name="Designer" IsTextSearchEnabled="True" Header="Đơn vị thiết kế" Margin="0,8,16,8" MinWidth="250"
-                        RelativePanel.Below="StartTime" RelativePanel.AlignLeftWithPanel="True"
-                        ItemsSource="{x:Bind Designers}" SelectedValue="{x:Bind ViewModel.Designer.ToString(), BindBack=ViewModel.SetBridgeDesigner, Mode=TwoWay}"/>
+                        <ComboBox x:Name="Designer" IsEnabled="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" IsEditable="True" IsTextSearchEnabled="True" Header="Đơn vị thiết kế" Margin="0,8,16,8" MinWidth="250"
+                        RelativePanel.Below="StartTime" RelativePanel.AlignLeftWithPanel="True" ItemsSource="{x:Bind Designers}" SelectedValue="{x:Bind ViewModel.Designer.ToString(), BindBack=ViewModel.SetBridgeDesigner, Mode=TwoWay}"/>
 
-                        <ComboBox x:Name="Builder" IsTextSearchEnabled="True" Header="Đơn vị thi công" Margin="0,8,16,8" MinWidth="250"
-                        RelativePanel.Below="StartTime" RelativePanel.RightOf="Designer" 
-                        ItemsSource="{x:Bind Builders}" SelectedValue="{x:Bind ViewModel.Builder.ToString(), BindBack=ViewModel.SetBridgeBuilder, Mode=TwoWay}"/>
+                        <ComboBox x:Name="Builder" IsEnabled="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" IsEditable="True" IsTextSearchEnabled="True" Header="Đơn vị thi công" Margin="0,8,16,8" MinWidth="250"
+                        RelativePanel.Below="StartTime" RelativePanel.RightOf="Designer" ItemsSource="{x:Bind Builders}" SelectedValue="{x:Bind ViewModel.Builder.ToString(), BindBack=ViewModel.SetBridgeBuilder, Mode=TwoWay}"/>
 
-                        <ComboBox x:Name="Manager" IsTextSearchEnabled="True" Header="Đơn vị quản lý" Margin="0,8,16,8" MinWidth="250"
-                        RelativePanel.Below="StartTime" RelativePanel.RightOf="Builder"
-                        ItemsSource="{x:Bind Managers}" SelectedValue="{x:Bind ViewModel.Manager.ToString(), BindBack=ViewModel.SetBridgeManager, Mode=TwoWay}"/>
+                        <ComboBox x:Name="Manager" IsEnabled="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" IsEditable="True" IsTextSearchEnabled="True" Header="Đơn vị quản lý" Margin="0,8,16,8" MinWidth="250"
+                        RelativePanel.Below="StartTime" RelativePanel.RightOf="Builder" ItemsSource="{x:Bind Managers}" SelectedValue="{x:Bind ViewModel.Manager.ToString(), BindBack=ViewModel.SetBridgeManager, Mode=TwoWay}"/>
 
-                        <ComboBox x:Name="Supervisor" IsTextSearchEnabled="True" Header="Đơn vị giám sát" Margin="0,8,16,8" MinWidth="250"
-                        RelativePanel.Below="StartTime" RelativePanel.RightOf="Manager"
-                        ItemsSource="{x:Bind Supervisors}" SelectedValue="{x:Bind ViewModel.Supervisor.ToString(), BindBack=ViewModel.SetBridgeSupervisor, Mode=TwoWay}"/>
+                        <ComboBox x:Name="Supervisor" IsEnabled="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" IsEditable="True" IsTextSearchEnabled="True" Header="Đơn vị giám sát" Margin="0,8,16,8" MinWidth="250"
+                        RelativePanel.Below="StartTime" RelativePanel.RightOf="Manager" ItemsSource="{x:Bind Supervisors}" SelectedValue="{x:Bind ViewModel.Supervisor.ToString(), BindBack=ViewModel.SetBridgeSupervisor, Mode=TwoWay}"/>
                     </RelativePanel>
 
                 </muxc:Expander>

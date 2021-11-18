@@ -26,10 +26,9 @@ namespace QuanLyCauDuong.Views
         public Home()
         {
             this.InitializeComponent();
-            this.ViewModel = new RecordingViewModel();
+            this.ViewModel = new HomeViewModel();
         }
 
-        public RecordingViewModel ViewModel { get; set; }
-        public ChartViewModel ViewModelChart { get; set; }
+        public HomeViewModel ViewModel { get; set; }
     }
 }

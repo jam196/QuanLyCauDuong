@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Toolkit.Uwp;
 using Models;
+using NClone;
 using Windows.System;
 
 namespace QuanLyCauDuong.ViewModels
@@ -137,7 +138,7 @@ namespace QuanLyCauDuong.ViewModels
                     Bridges.Add(new BridgeViewModel(c));
                 }
 
-                CloneBridges = Bridges;
+                CloneBridges = Clone.ObjectGraph(Bridges);
                 IsLoading = false;
             });
         }
