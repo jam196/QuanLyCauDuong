@@ -11,6 +11,10 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Syncfusion.XlsIO;
+using System.IO;
+using Windows.Storage;
+using System.Collections.Generic;
 
 namespace QuanLyCauDuong.Views
 {
@@ -69,7 +73,7 @@ namespace QuanLyCauDuong.Views
                 {
                     string[] parameters = sender.Text.Split(new char[] { ' ' },
                         StringSplitOptions.RemoveEmptyEntries);
-                    sender.ItemsSource = ViewModel.Bridges
+                    /*sender.ItemsSource = ViewModel.Bridges
                          .Where(bridge => parameters.Any(parameter =>
                              bridge.Name.Contains(parameter) ||
                              bridge.Name.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
@@ -78,6 +82,9 @@ namespace QuanLyCauDuong.Views
                          .OrderByDescending(bridge => parameters.Count(parameter =>
                              bridge.Name.StartsWith(parameter) ||
                              bridge.Investor.StartsWith(parameter)))
+                         .Select(bridge => $"{bridge.Name}");*/
+                    sender.ItemsSource = ViewModel.Bridges
+                         .Where(bridge => bridge.Name.Contains(sender.Text))
                          .Select(bridge => $"{bridge.Name}");
                 }
             }
@@ -114,7 +121,7 @@ namespace QuanLyCauDuong.Views
             string[] parameters = text.Split(new char[] { ' ' },
                 StringSplitOptions.RemoveEmptyEntries);
 
-            var matches = ViewModel.Bridges.Where(bridge => parameters
+            /*var matches = ViewModel.Bridges.Where(bridge => parameters
                 .Any(parameter =>
                     bridge.Name.Contains(parameter) ||
                     bridge.Investor.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) ||
@@ -125,6 +132,8 @@ namespace QuanLyCauDuong.Views
                     bridge.Investor.StartsWith(parameter) ||
                     bridge.Builder.StartsWith(parameter) ||
                     bridge.Supervisor.StartsWith(parameter)))
+                .ToList();*/
+            var matches = ViewModel.Bridges.Where(bridge => bridge.Name.Contains(text))
                 .ToList();
 
             await dispatcherQueue.EnqueueAsync(() =>
@@ -196,9 +205,19 @@ namespace QuanLyCauDuong.Views
             }
         }
 
-        private void DataGrid_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e) =>
-            Frame.Navigate(typeof(BridgeDetailPage), ViewModel.SelectedBridge.Model.Id,
+        private void DataGrid_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            try
+            {
+                Frame.Navigate(typeof(BridgeDetailPage), ViewModel.SelectedBridge.Model.Id,
                     new DrillInNavigationTransitionInfo());
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err.Message);
+            }
+        }
+
 
         /// <summary>
         /// Chuyển đến trang thêm mới cầu.
@@ -276,42 +295,47 @@ namespace QuanLyCauDuong.Views
             });
         }
 
-        private void ExportToExcel_Click(object sender, RoutedEventArgs e)
+        private async void ExportToExcel_Click(object sender, RoutedEventArgs e)
         {
-            /*using (ExcelEngine excelEngine = new ExcelEngine())
+            Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+
+            using (ExcelEngine excelEngine = new ExcelEngine())
             {
                 IApplication application = excelEngine.Excel;
                 application.DefaultVersion = ExcelVersion.Excel2016;
 
-                //Create a new workbook
                 IWorkbook workbook = application.Workbooks.Create(1);
                 IWorksheet sheet = workbook.Worksheets[0];
 
-                //Create a dataset from XML file
-                DataSet customersDataSet = new DataSet();
-                customersDataSet.ReadXml(Path.GetFullPath(@"../../Data/Employees.xml"));
+                sheet.InsertRow(2, 1, ExcelInsertOptions.FormatAsBefore);
 
-                //Create datatable from the dataset
-                DataTable dataTable = new DataTable();
-                dataTable = customersDataSet.Tables[0];
+                string[] header = new string[23]
+                {"Tên cầu", "Mã định danh", "Tên cầu", "Chủ đầu tư", "Tổng vốn đầu tư", "Chi phí bảo trì", "", "Đơn vị thi công", "Tải trọng  thiết kế", "", "Đơn vị thiết kế", "Đơn vị giám sát", "Đơn vị quản lý", "Trạng thái", "Vị trí", "", "", "", "", "", "", "", ""};
 
-                //Import data from the data table with column header, at first row and first column, 
-                //and by its column type.
-                sheet.ImportDataTable(dataTable, true, 1, 1, true);
+                sheet.ImportArray(header, 2, 2, false);
+                sheet.ImportData(ViewModel.Bridges, 3, 1, false);
+                sheet.DeleteColumn(2);
+                sheet.DeleteColumn(2);
+                sheet.DeleteColumn(6);
+                sheet.DeleteColumn(8);
 
-                //Creating Excel table or list object and apply style to the table
-                IListObject table = sheet.ListObjects.Create("Employee_PersonalDetails", sheet.UsedRange);
+                sheet.DeleteColumn(12);
+                sheet.DeleteColumn(12);
+                sheet.DeleteColumn(12);
+                sheet.DeleteColumn(12);
+                sheet.DeleteColumn(12);
+                sheet.DeleteColumn(12);
+                sheet.DeleteColumn(12);
+                sheet.DeleteColumn(12);
+                sheet.DeleteColumn(12);
 
-                table.BuiltInTableStyle = TableBuiltInStyles.TableStyleMedium14;
-
-                //Autofit the columns
                 sheet.UsedRange.AutofitColumns();
 
-                //Save the file in the given path
-                Stream excelStream = File.Create(Path.GetFullPath(@"Output.xlsx"));
+                Windows.Storage.StorageFile storageFile = await storageFolder.CreateFileAsync("Output.xlsx", Windows.Storage.CreationCollisionOption.ReplaceExisting);
+                Stream excelStream = await storageFile.OpenStreamForWriteAsync();
                 workbook.SaveAs(excelStream);
                 excelStream.Dispose();
-            }*/
+            }
         }
     }
 }

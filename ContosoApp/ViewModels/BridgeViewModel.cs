@@ -114,7 +114,7 @@ namespace QuanLyCauDuong.ViewModels
         }
 
         /// <summary>
-        /// Get/set thông tin tổng đầu tư cầu.
+        /// Get/set thông tin chi phí bảo trì.
         /// </summary>
         public string MaintenanceCost
         {
@@ -123,7 +123,14 @@ namespace QuanLyCauDuong.ViewModels
             {
                 if (value != Model?.MaintenanceCost.ToString())
                 {
-                    Model.MaintenanceCost = float.Parse(value);
+                    try
+                    {
+                        Model.MaintenanceCost = float.Parse(value);
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
                     IsModified = true;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(MaintenanceCost));
@@ -177,7 +184,14 @@ namespace QuanLyCauDuong.ViewModels
             {
                 if (value != Model.DesignLoad.ToString())
                 {
-                    Model.DesignLoad = float.Parse(value);
+                    try
+                    {
+                        Model.DesignLoad = float.Parse(value);
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
                     IsModified = true;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(DesignLoad));

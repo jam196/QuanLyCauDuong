@@ -100,7 +100,7 @@
                                 RelativePanel.RightOf="Name"
                                 Text="{x:Bind ViewModel.TotalInvestment, Mode=TwoWay}" />
 
-                        <ComboBox x:Name="Investor" IsEditable="False" IsTextSearchEnabled="True" Header="Chủ đầu tư" Margin="0,8,16,8" MinWidth="250"
+                        <ComboBox x:Name="Investor" IsEnabled="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" IsEditable="True" IsTextSearchEnabled="True" Header="Chủ đầu tư" Margin="0,8,16,8" MinWidth="250"
                         RelativePanel.RightOf="TotalInvestment"
                         ItemsSource="{x:Bind Investors}" SelectedValue="{x:Bind ViewModel.Investor.ToString(), BindBack=ViewModel.SetBridgeInvestor, Mode=TwoWay}"/>
 

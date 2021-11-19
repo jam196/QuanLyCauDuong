@@ -42,14 +42,14 @@ namespace QuanLyCauDuong.Views
         {
             InitializeComponent();
 
-            if (App.Repository.GetType() == typeof(SqlContosoRepository))
+            /*if (App.Repository.GetType() == typeof(SqlContosoRepository))
             {
                 SqliteRadio.IsChecked = true;
             }
             else
             {
                 RestRadio.IsChecked = true;
-            }
+            }*/
         }
 
         /// <summary>

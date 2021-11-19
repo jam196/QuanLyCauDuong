@@ -9,7 +9,7 @@
     <Grid>
         <StackPanel>
 
-            <TextBlock x:Name="PageTitle"
+            <!--<TextBlock x:Name="PageTitle"
                 Style="{StaticResource PageTitleTextBlockStyle}"
                 Text="Cài đặt" />
 
@@ -18,7 +18,7 @@
                 <RadioButton Checked="OnDataSourceChanged" x:Name="RestRadio" Tag="Rest">REST (Azure)</RadioButton>
             </muxc:RadioButtons>
             
-            <TextBlock Text="Data is read-only while using REST unless you deploy your own service. See the GitHub repository for details." />
+            <TextBlock Text="Data is read-only while using REST unless you deploy your own service. See the GitHub repository for details." />-->
 
             <HyperlinkButton
                 x:Name="PrivacyButton"

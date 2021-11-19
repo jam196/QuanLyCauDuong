@@ -84,7 +84,7 @@
                     <Button Margin="0,0,16,8" x:Name="FilterBuidlingBridges" Click="FilterBuidlingBridges_Click" Content="Cầu đang xây dựng" RelativePanel.AlignLeftWithPanel="True" MinHeight="30" Style="{StaticResource AccentButtonStyle}"/>
                     <Button Margin="0,0,16,8" x:Name="FilterErrorBridges" Click="FilterErrorBridges_Click" Content="Cầu đang bảo trì" RelativePanel.RightOf="FilterBuidlingBridges" MinHeight="30" Style="{StaticResource AccentButtonStyle}"/>
                     <Button Margin="0,0,16,8" x:Name="FilterWorkingBridges" Click="FilterWorkingBridges_Click" Content="Cầu đang hoạt động tốt" RelativePanel.RightOf="FilterErrorBridges" MinHeight="30" Style="{StaticResource AccentButtonStyle}"/>
-                    <Button x:Name="ExportToExcel" Click="ExportToExcel_Click" Content="Xuất file Excel" RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="FilterBuidlingBridges" MinHeight="30" Margin="0,30,0,0" Style="{StaticResource AccentButtonStyle}"/>
+                    <Button Margin="0,20,0,0" x:Name="ExportToExcel" Click="ExportToExcel_Click" Content="Xuất file Excel" RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="FilterBuidlingBridges" MinHeight="30" Style="{StaticResource AccentButtonStyle}"/>
                 </RelativePanel>
             </muxc:Expander>
         </StackPanel>
@@ -121,9 +121,10 @@
                             Header="Tổng vốn đầu tư (tỷ)"
                             Tag="TotalInvestment"
                             Binding="{Binding TotalInvestment}"
-                            CanUserSort="False"/>
+                            CanUserSort="True"/>
                     <toolkit:DataGridTextColumn
                             Tag="DesignLoad"
+                            CanUserSort="True"
                             Header="Tải trọng thiết kế (tấn)"
                             Binding="{Binding DesignLoad}"/>
                     <toolkit:DataGridTextColumn
@@ -134,7 +135,7 @@
                     <toolkit:DataGridTextColumn
                             Header="Tình trạng"
                             Binding="{Binding Status}"
-                            CanUserSort="False"/>
+                            CanUserSort="True"/>
                 </toolkit:DataGrid.Columns>
             </toolkit:DataGrid>
 

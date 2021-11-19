@@ -1,9 +1,10 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Toolkit.Uwp;
 using Models;
 using NClone;
+using Windows.Storage;
 using Windows.System;
 
 namespace QuanLyCauDuong.ViewModels
@@ -291,11 +292,24 @@ namespace QuanLyCauDuong.ViewModels
             });
         }
 
+        public HistoryViewModel ViewModelHistory { get; set; }
+
         /// <summary>
         /// Deletes the specified order from the database.
         /// </summary>
-        public async Task DeleteBridge(Bridge bridgeToDelete) =>
+        public async Task DeleteBridge(Bridge bridgeToDelete)
+        {
+            string content = "Người dùng " + ApplicationData.Current.RoamingSettings.Values["Email"] + " đã xóa thông tin " + bridgeToDelete.Name + " khỏi hệ thống";
+            ViewModelHistory = new HistoryViewModel
+            {
+                IsNewHistory = true,
+                Content = content,
+                IsInEdit = true
+            };
+
+            await ViewModelHistory.SaveAsync();
             await App.Repository.Bridges.DeleteAsync(bridgeToDelete.Id);
+        }
 
         /// <summary>
         /// Deletes the specified order from the database.
