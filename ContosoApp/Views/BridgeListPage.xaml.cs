@@ -15,6 +15,7 @@ using Syncfusion.XlsIO;
 using System.IO;
 using Windows.Storage;
 using System.Collections.Generic;
+using Windows.Storage.Pickers;
 
 namespace QuanLyCauDuong.Views
 {
@@ -309,11 +310,13 @@ namespace QuanLyCauDuong.Views
 
                 sheet.InsertRow(2, 1, ExcelInsertOptions.FormatAsBefore);
 
+                int rows = ViewModel.CloneBridges.Count;
+
                 string[] header = new string[23]
-                {"Tên cầu", "Mã định danh", "Tên cầu", "Chủ đầu tư", "Tổng vốn đầu tư", "Chi phí bảo trì", "", "Đơn vị thi công", "Tải trọng  thiết kế", "", "Đơn vị thiết kế", "Đơn vị giám sát", "Đơn vị quản lý", "Trạng thái", "Vị trí", "", "", "", "", "", "", "", ""};
+                {"Tên cầu", "Mã định danh", "Tên cầu", "Chủ đầu tư", "Tổng vốn đầu tư (tỷ)", "Chi phí bảo trì (tỷ)", "", "Đơn vị thi công", "Tải trọng  thiết kế", "", "Đơn vị thiết kế", "Đơn vị giám sát", "Đơn vị quản lý", "Trạng thái", "Vị trí", "", "", "", "", "", "", "", ""};
 
                 sheet.ImportArray(header, 2, 2, false);
-                sheet.ImportData(ViewModel.Bridges, 3, 1, false);
+                sheet.ImportData(ViewModel.CloneBridges, 3, 1, false);
                 sheet.DeleteColumn(2);
                 sheet.DeleteColumn(2);
                 sheet.DeleteColumn(6);
@@ -331,10 +334,28 @@ namespace QuanLyCauDuong.Views
 
                 sheet.UsedRange.AutofitColumns();
 
-                Windows.Storage.StorageFile storageFile = await storageFolder.CreateFileAsync("Output.xlsx", Windows.Storage.CreationCollisionOption.ReplaceExisting);
+                /*Windows.Storage.StorageFile storageFile = await storageFolder.CreateFileAsync("Output.xlsx", Windows.Storage.CreationCollisionOption.ReplaceExisting);
                 Stream excelStream = await storageFile.OpenStreamForWriteAsync();
                 workbook.SaveAs(excelStream);
-                excelStream.Dispose();
+                excelStream.Dispose();*/
+
+                //Initializes FileSavePicker
+                FileSavePicker savePicker = new FileSavePicker();
+                savePicker.SuggestedStartLocation = PickerLocationId.Desktop;
+                savePicker.SuggestedFileName = "Output";
+                savePicker.FileTypeChoices.Add("Excel Files", new List<string>() { ".xlsx" });
+
+
+                sheet.Range["D" + (3 + rows).ToString()].NumberFormat = "0.00";
+                sheet.Range["D" + (3 + rows).ToString()].Formula = "=SUM(D3:D" + (3 + rows - 1).ToString() + ")";
+                sheet.Range["E" + (3 + rows).ToString()].Formula = "=SUM(E3:E" + (3 + rows - 1).ToString() + ")";
+
+                //Creates a storage file from FileSavePicker
+                StorageFile storageFile = await savePicker.PickSaveFileAsync();
+                Stream excelStream = await storageFile.OpenStreamForWriteAsync();
+
+                //Saves changes to the specified storage file
+                workbook.SaveAs(excelStream);
             }
         }
     }

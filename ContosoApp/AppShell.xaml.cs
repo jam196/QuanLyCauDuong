@@ -171,10 +171,10 @@ namespace QuanLyCauDuong
                 {
                     NavView.SelectedItem = HistoryListMenuItem;
                 }
-                else if (e.SourcePageType == typeof(ExportPage))
+                /*else if (e.SourcePageType == typeof(ExportPage))
                 {
                     NavView.SelectedItem = ExportMenuItem;
-                }
+                }*/
                 /*else if (e.SourcePageType == typeof(OrderListPage))
                 {
                     NavView.SelectedItem = OrderListMenuItem;

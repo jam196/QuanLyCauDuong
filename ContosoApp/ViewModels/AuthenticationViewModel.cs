@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Graph;
+using Microsoft.Identity.Client;
 using Windows.ApplicationModel.Core;
 using Windows.Security.Authentication.Web.Core;
 using Windows.Security.Credentials;
@@ -214,6 +215,8 @@ namespace QuanLyCauDuong.ViewModels
             }
         }
 
+        public WebAccount account;
+
         /// <summary>
         /// Gets an auth token for the user, which can be used to call the Microsoft Graph API.
         /// </summary>
@@ -228,6 +231,7 @@ namespace QuanLyCauDuong.ViewModels
             {
                 result = await WebAuthenticationCoreManager.RequestTokenAsync(request);
             }
+            account = result.ResponseData[0].WebAccount;
             return result.ResponseStatus == WebTokenRequestStatus.Success ?
                 result.ResponseData[0].Token : null;
         }
@@ -296,10 +300,16 @@ namespace QuanLyCauDuong.ViewModels
             AccountsSettingsPaneCommandsRequestedEventArgs args)
         {
             var deferral = args.GetDeferral();
+            args.HeaderText = "Vui lòng chọn một trong các tài khoản dưới đây.";
             var command = new WebAccountProviderCommand(await GetAadProviderAsync(), async (x) =>
                 await LoginAsync());
             args.WebAccountProviderCommands.Add(command);
             deferral.Complete();
+        }
+
+        private void GetTwitterTokenAsync(WebAccountProviderCommand command)
+        {
+            // Manually handle Twitter login here
         }
 
         /// <summary>
@@ -343,8 +353,19 @@ namespace QuanLyCauDuong.ViewModels
                     PrimaryButtonText = "Đăng xuất",
                     SecondaryButtonText = "Hủy"
                 };
+
+                ApplicationData.Current.LocalSettings.Values.Remove("CurrentUserProviderId");
+                ApplicationData.Current.LocalSettings.Values.Remove("CurrentUserId");
+
                 ApplicationData.Current.RoamingSettings.Values["IsLoggedIn"] = false;
                 ApplicationData.Current.RoamingSettings.Values["Email"] = "null@gmail.com";
+                ApplicationData.Current.RoamingSettings.Values.Remove("IsLoggedIn");
+                ApplicationData.Current.RoamingSettings.Values.Remove("Email");
+
+                ApplicationData.Current.LocalSettings.Values.Remove("CurrentUserWebAccountProviderId");
+                ApplicationData.Current.LocalSettings.Values.Remove("CurrentUserWebAccountId");
+                await account.SignOutAsync();
+
                 await SetVisibleAsync(vm => vm.ShowWelcome);
                 await SignoutDialog.ShowAsync();
             }

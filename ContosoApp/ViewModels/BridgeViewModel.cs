@@ -295,7 +295,14 @@ namespace QuanLyCauDuong.ViewModels
             {
                 if (value != Model?.Location)
                 {
-                    Model.Location = value;
+                    try
+                    {
+                        Model.Location = value;
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
                     IsModified = true;
                     OnPropertyChanged();
                 }

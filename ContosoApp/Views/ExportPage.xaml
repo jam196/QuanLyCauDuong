@@ -9,7 +9,7 @@
 
     <Grid>
         <StackPanel>
-            <TextBlock Text="Trang export" />
+            <TextBlock Text="Bạn phải đăng nhập để truy cập chức năng này!" />
         </StackPanel>
     </Grid>
 </Page>

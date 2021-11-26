@@ -66,11 +66,11 @@
                     Content="{x:Bind HistoryListLabel}" 
                     ToolTipService.ToolTip="{x:Bind HistoryListLabel}"
                     Icon="Shop"/>
-                <muxc:NavigationViewItem
+                <!--<muxc:NavigationViewItem
                     x:Name="ExportMenuItem"
                     Content="{x:Bind ExportLabel}" 
                     ToolTipService.ToolTip="{x:Bind ExportLabel}"
-                    Icon="Paste"/>
+                    Icon="Paste"/>-->
             </muxc:NavigationView.MenuItems>
 
             <muxc:NavigationView.PaneFooter>
